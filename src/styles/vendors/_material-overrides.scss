@@ -1,0 +1,397 @@
+// ============================================================================
+// MATERIAL OVERRIDES - SPIKERZ DASHBOARD
+// ============================================================================
+// Additional customizations for Angular Material components
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+// ============================================================================
+// COMPONENT-SPECIFIC OVERRIDES
+// ============================================================================
+
+// Custom badge styles
+.mat-badge {
+  .mat-badge-content {
+    background-color: $color-danger;
+    color: $text-inverse;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    border-radius: $border-radius-full;
+    padding: $spacing-1 $spacing-2;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    @include flex-center;
+  }
+
+  &.mat-badge-success .mat-badge-content {
+    background-color: $color-success;
+  }
+
+  &.mat-badge-warning .mat-badge-content {
+    background-color: $color-warning;
+  }
+
+  &.mat-badge-info .mat-badge-content {
+    background-color: $color-info;
+  }
+}
+
+// Custom chip styles
+.mat-chip {
+  border-radius: $border-radius-full !important;
+  font-size: $font-size-sm !important;
+  font-weight: $font-weight-medium !important;
+  padding: $spacing-2 $spacing-3 !important;
+  min-height: 2rem !important;
+
+  &.mat-chip-selected {
+    background-color: $color-primary-blue !important;
+    color: $text-inverse !important;
+  }
+
+  .mat-chip-remove {
+    margin-left: $spacing-2 !important;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+// Status chip variants
+.mat-chip-success {
+  background-color: rgba($color-success, 0.1) !important;
+  color: $color-success !important;
+}
+
+.mat-chip-warning {
+  background-color: rgba($color-warning, 0.1) !important;
+  color: $color-warning !important;
+}
+
+.mat-chip-danger {
+  background-color: rgba($color-danger, 0.1) !important;
+  color: $color-danger !important;
+}
+
+.mat-chip-info {
+  background-color: rgba($color-info, 0.1) !important;
+  color: $color-info !important;
+}
+
+// Custom expansion panel styles
+.mat-expansion-panel {
+  border-radius: $border-radius-lg !important;
+  box-shadow: $shadow-sm !important;
+  margin-bottom: $spacing-4 !important;
+  border: $border-width-1 $border-style-solid $border-light !important;
+
+  &:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .mat-expansion-panel-header {
+    padding: $spacing-4 $spacing-6 !important;
+    font-weight: $font-weight-medium !important;
+
+    &:hover {
+      background-color: $bg-hover !important;
+    }
+  }
+
+  .mat-expansion-panel-content {
+    .mat-expansion-panel-body {
+      padding: 0 $spacing-6 $spacing-4 !important;
+    }
+  }
+}
+
+// Custom list styles
+.mat-list {
+  .mat-list-item {
+    color: $text-primary !important;
+    border-radius: $border-radius-base !important;
+    margin-bottom: $spacing-1 !important;
+
+    &:hover {
+      background-color: $bg-hover !important;
+    }
+
+    .mat-list-icon {
+      color: $text-secondary !important;
+      margin-right: $spacing-3 !important;
+    }
+  }
+
+  .mat-list-item-content {
+    padding: $spacing-3 $spacing-4 !important;
+  }
+}
+
+.mat-nav-list {
+  .mat-list-item {
+    &.active {
+      background-color: $bg-selected !important;
+      color: $color-primary-green !important;
+      font-weight: $font-weight-semibold !important;
+
+      .mat-list-icon {
+        color: $color-primary-green !important;
+      }
+    }
+  }
+}
+
+// Custom divider styles
+.mat-divider {
+  border-color: $border-light !important;
+  margin: $spacing-4 0 !important;
+
+  &.mat-divider-vertical {
+    margin: 0 $spacing-4 !important;
+  }
+}
+
+// Custom grid list styles
+.mat-grid-list {
+  .mat-grid-tile {
+    border-radius: $border-radius-lg !important;
+    overflow: hidden;
+  }
+
+  .mat-grid-tile-content {
+    background-color: $bg-card !important;
+    color: $text-primary !important;
+  }
+
+  .mat-grid-tile-header,
+  .mat-grid-tile-footer {
+    background-color: rgba($color-black, 0.7) !important;
+    color: $text-inverse !important;
+    font-weight: $font-weight-medium !important;
+  }
+}
+
+// Custom button toggle styles
+.mat-button-toggle-group {
+  border-radius: $border-radius-base !important;
+  overflow: hidden;
+  border: $border-width-1 $border-style-solid $border-medium !important;
+
+  .mat-button-toggle {
+    border: none !important;
+    color: $text-primary !important;
+
+    &:hover {
+      background-color: $bg-hover !important;
+    }
+
+    &.mat-button-toggle-checked {
+      background-color: $color-primary-blue !important;
+      color: $text-inverse !important;
+    }
+  }
+}
+
+// Custom date picker styles
+.mat-datepicker-popup {
+  border-radius: $border-radius-lg !important;
+  box-shadow: $shadow-xl !important;
+  border: $border-width-1 $border-style-solid $border-light !important;
+}
+
+.mat-calendar {
+  font-family: $font-family-primary !important;
+
+  .mat-calendar-header {
+    background-color: $color-primary-blue !important;
+    color: $text-inverse !important;
+  }
+
+  .mat-calendar-body-selected {
+    background-color: $color-primary-blue !important;
+    color: $text-inverse !important;
+  }
+
+  .mat-calendar-body-today {
+    border-color: $color-primary-blue !important;
+  }
+}
+
+// Custom slider styles
+.mat-slider {
+  .mat-slider-track-fill {
+    background-color: $color-primary-blue !important;
+  }
+
+  .mat-slider-thumb {
+    background-color: $color-primary-blue !important;
+    border-color: $color-primary-blue !important;
+  }
+
+  .mat-slider-thumb-label {
+    background-color: $color-primary-blue !important;
+    color: $text-inverse !important;
+  }
+}
+
+// Custom autocomplete styles
+.mat-autocomplete-panel {
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-lg !important;
+  border: $border-width-1 $border-style-solid $border-light !important;
+  max-height: 16rem !important;
+
+  .mat-option {
+    font-family: $font-family-primary !important;
+    padding: $spacing-3 $spacing-4 !important;
+
+    &:hover {
+      background-color: $bg-hover !important;
+    }
+
+    &.mat-selected {
+      background-color: $bg-selected !important;
+      color: $color-primary-green !important;
+    }
+  }
+}
+
+// Custom tree styles
+.mat-tree {
+  color: $text-primary !important;
+
+  .mat-tree-node {
+    padding: $spacing-2 $spacing-4 !important;
+    border-radius: $border-radius-base !important;
+    margin-bottom: $spacing-1 !important;
+
+    &:hover {
+      background-color: $bg-hover !important;
+    }
+  }
+
+  .mat-tree-node-toggle {
+    color: $text-secondary !important;
+  }
+}
+
+// Custom sort header styles
+.mat-sort-header-button {
+  color: $text-secondary !important;
+  font-weight: $font-weight-semibold !important;
+
+  &:hover {
+    color: $text-primary !important;
+  }
+}
+
+.mat-sort-header-arrow {
+  color: $color-primary-blue !important;
+}
+
+// ============================================================================
+// RESPONSIVE OVERRIDES
+// ============================================================================
+
+@include responsive(sm) {
+  .mat-dialog-container {
+    margin: $spacing-4 !important;
+    max-width: calc(100vw - #{$spacing-8}) !important;
+    max-height: calc(100vh - #{$spacing-8}) !important;
+  }
+
+  .mat-sidenav {
+    width: 100% !important;
+    max-width: $sidebar-width !important;
+  }
+
+  .mat-toolbar {
+    padding: 0 $spacing-4 !important;
+
+    .mat-toolbar-row {
+      padding: 0;
+    }
+  }
+
+  .mat-card {
+    margin: $spacing-2 !important;
+    border-radius: $border-radius-base !important;
+  }
+
+  .mat-form-field {
+    width: 100% !important;
+  }
+
+  .mat-table {
+    .mat-header-cell,
+    .mat-cell {
+      padding: $spacing-2 $spacing-3 !important;
+      font-size: $font-size-sm !important;
+    }
+  }
+}
+
+// ============================================================================
+// CUSTOM UTILITY CLASSES
+// ============================================================================
+
+// Material elevation utilities
+.mat-elevation-z0 {
+  box-shadow: none !important;
+}
+.mat-elevation-z1 {
+  box-shadow: $shadow-sm !important;
+}
+.mat-elevation-z2 {
+  box-shadow: $shadow-base !important;
+}
+.mat-elevation-z3 {
+  box-shadow: $shadow-md !important;
+}
+.mat-elevation-z4 {
+  box-shadow: $shadow-lg !important;
+}
+.mat-elevation-z5 {
+  box-shadow: $shadow-xl !important;
+}
+
+// Material color utilities
+.mat-primary-bg {
+  background-color: $color-primary-blue !important;
+}
+.mat-accent-bg {
+  background-color: $color-primary-green !important;
+}
+.mat-warn-bg {
+  background-color: $color-danger !important;
+}
+
+.mat-primary-text {
+  color: $color-primary-blue !important;
+}
+.mat-accent-text {
+  color: $color-primary-green !important;
+}
+.mat-warn-text {
+  color: $color-danger !important;
+}
+
+// Material spacing utilities
+.mat-spacer {
+  flex: 1 1 auto;
+}
+.mat-spacer-sm {
+  width: $spacing-2;
+  height: $spacing-2;
+}
+.mat-spacer-md {
+  width: $spacing-4;
+  height: $spacing-4;
+}
+.mat-spacer-lg {
+  width: $spacing-6;
+  height: $spacing-6;
+}

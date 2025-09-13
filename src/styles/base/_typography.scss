@@ -1,0 +1,467 @@
+// ============================================================================
+// TYPOGRAPHY - SPIKERZ DASHBOARD
+// ============================================================================
+// Typography system using design tokens
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+// ============================================================================
+// FONT FACE DECLARATIONS
+// ============================================================================
+
+// Inter font family (primary)
+// Note: In production, these would be loaded via Google Fonts or local files
+// For now, we rely on system fonts as fallback
+
+// ============================================================================
+// BASE TYPOGRAPHY
+// ============================================================================
+
+body {
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  letter-spacing: $letter-spacing-normal;
+}
+
+// ============================================================================
+// HEADINGS
+// ============================================================================
+
+h1,
+.heading-1 {
+  font-size: $font-size-4xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  color: $text-primary;
+  margin-bottom: $spacing-6;
+
+  @include responsive(sm) {
+    font-size: $font-size-3xl;
+  }
+}
+
+h2,
+.heading-2 {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: $letter-spacing-tight;
+  color: $text-primary;
+  margin-bottom: $spacing-5;
+
+  @include responsive(sm) {
+    font-size: $font-size-2xl;
+  }
+}
+
+h3,
+.heading-3 {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+
+  @include responsive(sm) {
+    font-size: $font-size-xl;
+  }
+}
+
+h4,
+.heading-4 {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  color: $text-primary;
+  margin-bottom: $spacing-3;
+
+  @include responsive(sm) {
+    font-size: $font-size-lg;
+  }
+}
+
+h5,
+.heading-5 {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  margin-bottom: $spacing-3;
+}
+
+h6,
+.heading-6 {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-normal;
+  color: $text-secondary;
+  margin-bottom: $spacing-2;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+// ============================================================================
+// BODY TEXT
+// ============================================================================
+
+p,
+.text-body {
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-relaxed;
+  color: $text-primary;
+  margin-bottom: $spacing-4;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.text-large {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+}
+
+.text-small {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+}
+
+.text-xs {
+  font-size: $font-size-xs;
+  line-height: $line-height-normal;
+}
+
+// ============================================================================
+// TEXT COLORS
+// ============================================================================
+
+.text-primary {
+  color: $text-primary;
+}
+
+.text-secondary {
+  color: $text-secondary;
+}
+
+.text-muted {
+  color: $text-muted;
+}
+
+.text-inverse {
+  color: $text-inverse;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+.text-warning {
+  color: $color-warning;
+}
+
+.text-danger {
+  color: $color-danger;
+}
+
+.text-info {
+  color: $color-info;
+}
+
+// ============================================================================
+// FONT WEIGHTS
+// ============================================================================
+
+.font-light {
+  font-weight: $font-weight-light;
+}
+
+.font-regular {
+  font-weight: $font-weight-regular;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold;
+}
+
+.font-extrabold {
+  font-weight: $font-weight-extrabold;
+}
+
+// ============================================================================
+// TEXT ALIGNMENT
+// ============================================================================
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+// ============================================================================
+// TEXT TRANSFORMATION
+// ============================================================================
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.text-normal-case {
+  text-transform: none;
+}
+
+// ============================================================================
+// TEXT UTILITIES
+// ============================================================================
+
+.text-truncate {
+  @include text-truncate;
+}
+
+.text-truncate-2 {
+  @include text-truncate-lines(2);
+}
+
+.text-truncate-3 {
+  @include text-truncate-lines(3);
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}
+
+.text-pre {
+  white-space: pre;
+}
+
+.text-pre-line {
+  white-space: pre-line;
+}
+
+.text-pre-wrap {
+  white-space: pre-wrap;
+}
+
+// ============================================================================
+// LINKS
+// ============================================================================
+
+a,
+.link {
+  color: $color-primary-blue;
+  text-decoration: none;
+  transition: $transition-colors;
+
+  &:hover {
+    color: darken($color-primary-blue, 15%);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    @include focus-ring($color-primary-blue);
+  }
+}
+
+.link-muted {
+  color: $text-muted;
+
+  &:hover {
+    color: $text-primary;
+  }
+}
+
+.link-danger {
+  color: $color-danger;
+
+  &:hover {
+    color: darken($color-danger, 15%);
+  }
+}
+
+// ============================================================================
+// CODE & MONOSPACE
+// ============================================================================
+
+code,
+kbd,
+samp,
+pre {
+  font-family: $font-family-mono;
+}
+
+code {
+  font-size: $font-size-sm;
+  background-color: $color-gray-100;
+  color: $color-gray-800;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+}
+
+pre {
+  background-color: $color-gray-100;
+  color: $color-gray-800;
+  padding: $spacing-4;
+  border-radius: $border-radius-base;
+  overflow-x: auto;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+
+  code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+kbd {
+  background-color: $color-gray-800;
+  color: $text-inverse;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $border-radius-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+// ============================================================================
+// LISTS
+// ============================================================================
+
+.list {
+  margin-bottom: $spacing-4;
+
+  li {
+    margin-bottom: $spacing-2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.list-ordered {
+  @extend .list;
+  list-style: decimal;
+  padding-left: $spacing-6;
+}
+
+.list-unordered {
+  @extend .list;
+  list-style: disc;
+  padding-left: $spacing-6;
+}
+
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+
+  li {
+    margin-bottom: $spacing-2;
+  }
+}
+
+// ============================================================================
+// BLOCKQUOTES
+// ============================================================================
+
+blockquote {
+  margin: $spacing-6 0;
+  padding: $spacing-4 $spacing-6;
+  border-left: 4px solid $color-primary-blue;
+  background-color: $color-gray-50;
+  font-style: italic;
+  color: $text-secondary;
+
+  p {
+    margin-bottom: $spacing-2;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  cite {
+    display: block;
+    margin-top: $spacing-2;
+    font-size: $font-size-sm;
+    font-style: normal;
+    color: $text-muted;
+
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+// ============================================================================
+// RESPONSIVE TYPOGRAPHY
+// ============================================================================
+
+// Responsive font scaling for better mobile experience
+@include responsive(sm) {
+  body {
+    font-size: $font-size-base;
+  }
+}
+
+@include responsive(lg) {
+  body {
+    font-size: $font-size-base;
+  }
+}
+
+// ============================================================================
+// PRINT TYPOGRAPHY
+// ============================================================================
+
+@media print {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  blockquote {
+    border: 1px solid $color-gray-300;
+    page-break-inside: avoid;
+  }
+}

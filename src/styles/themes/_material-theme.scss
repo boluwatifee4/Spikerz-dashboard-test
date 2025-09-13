@@ -1,0 +1,497 @@
+// ============================================================================
+// ANGULAR MATERIAL THEME - SPIKERZ DASHBOARD
+// ============================================================================
+// Custom Angular Material theme using our design tokens
+
+@use "@angular/material" as mat;
+@import "../abstracts/variables";
+
+// ============================================================================
+// DEFINE CUSTOM PALETTES
+// ============================================================================
+
+// Primary palette (Blue)
+$spikerz-primary: (
+  50: #eff6ff,
+  100: #dbeafe,
+  200: #bfdbfe,
+  300: #93c5fd,
+  400: #60a5fa,
+  500: #3b82f6,
+  // Our main primary blue
+  600: #2563eb,
+  700: #1d4ed8,
+  800: #1e40af,
+  900: #1e3a8a,
+  A100: #93c5fd,
+  A200: #60a5fa,
+  A400: #3b82f6,
+  A700: #1d4ed8,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+// Accent palette (Green)
+$spikerz-accent: (
+  50: #f0fdf4,
+  100: #dcfce7,
+  200: #bbf7d0,
+  300: #86efac,
+  400: #4ade80,
+  500: #22c55e,
+  // Our main accent green
+  600: #16a34a,
+  700: #15803d,
+  800: #166534,
+  900: #14532d,
+  A100: #86efac,
+  A200: #4ade80,
+  A400: #22c55e,
+  A700: #15803d,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+// Warn palette (Red)
+$spikerz-warn: (
+  50: #fef2f2,
+  100: #fee2e2,
+  200: #fecaca,
+  300: #fca5a5,
+  400: #f87171,
+  500: #ef4444,
+  // Our main warning/danger red
+  600: #dc2626,
+  700: #b91c1c,
+  800: #991b1b,
+  900: #7f1d1d,
+  A100: #fca5a5,
+  A200: #f87171,
+  A400: #ef4444,
+  A700: #b91c1c,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: rgba(black, 0.87),
+    A400: white,
+    A700: white,
+  ),
+);
+
+// ============================================================================
+// CREATE THEME CONFIGURATION
+// ============================================================================
+
+// Define typography configuration
+$spikerz-typography: mat.define-typography-config(
+  $font-family: $font-family-primary,
+  $headline-1:
+    mat.define-typography-level(
+      $font-size-4xl,
+      $line-height-tight,
+      $font-weight-bold
+    ),
+  $headline-2:
+    mat.define-typography-level(
+      $font-size-3xl,
+      $line-height-tight,
+      $font-weight-bold
+    ),
+  $headline-3:
+    mat.define-typography-level(
+      $font-size-2xl,
+      $line-height-snug,
+      $font-weight-semibold
+    ),
+  $headline-4:
+    mat.define-typography-level(
+      $font-size-xl,
+      $line-height-snug,
+      $font-weight-semibold
+    ),
+  $headline-5:
+    mat.define-typography-level(
+      $font-size-lg,
+      $line-height-normal,
+      $font-weight-medium
+    ),
+  $headline-6:
+    mat.define-typography-level(
+      $font-size-base,
+      $line-height-normal,
+      $font-weight-medium
+    ),
+  $subtitle-1:
+    mat.define-typography-level(
+      $font-size-base,
+      $line-height-normal,
+      $font-weight-medium
+    ),
+  $subtitle-2:
+    mat.define-typography-level(
+      $font-size-sm,
+      $line-height-normal,
+      $font-weight-medium
+    ),
+  $body-1:
+    mat.define-typography-level(
+      $font-size-base,
+      $line-height-relaxed,
+      $font-weight-regular
+    ),
+  $body-2:
+    mat.define-typography-level(
+      $font-size-sm,
+      $line-height-normal,
+      $font-weight-regular
+    ),
+  $caption:
+    mat.define-typography-level(
+      $font-size-xs,
+      $line-height-normal,
+      $font-weight-regular
+    ),
+  $button:
+    mat.define-typography-level(
+      $font-size-base,
+      $line-height-tight,
+      $font-weight-medium
+    ),
+  $overline:
+    mat.define-typography-level(
+      $font-size-xs,
+      $line-height-normal,
+      $font-weight-medium
+    ),
+);
+
+// Create the theme
+$spikerz-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: mat.define-palette($spikerz-primary, 500),
+      accent: mat.define-palette($spikerz-accent, 500),
+      warn: mat.define-palette($spikerz-warn, 500),
+    ),
+    typography: $spikerz-typography,
+    density: 0,
+  )
+);
+
+// ============================================================================
+// APPLY THEME
+// ============================================================================
+
+// Include the common styles for Angular Material
+@include mat.core($spikerz-typography);
+
+// Apply the theme to all Angular Material components
+@include mat.all-component-themes($spikerz-theme);
+
+// ============================================================================
+// CUSTOM THEME OVERRIDES
+// ============================================================================
+
+// Override specific Material components to match our design
+.mat-toolbar {
+  background-color: $bg-primary !important;
+  color: $text-primary !important;
+  border-bottom: $border-width-1 $border-style-solid $border-light;
+}
+
+.mat-sidenav {
+  background-color: $bg-primary !important;
+  color: $text-primary !important;
+  border-right: $border-width-1 $border-style-solid $border-light;
+  width: $sidebar-width !important;
+}
+
+.mat-sidenav-content {
+  background-color: $bg-secondary !important;
+}
+
+.mat-card {
+  background-color: $bg-card !important;
+  color: $text-primary !important;
+  border-radius: $border-radius-lg !important;
+  box-shadow: $shadow-sm !important;
+  border: $border-width-1 $border-style-solid $border-light;
+
+  &:hover {
+    box-shadow: $shadow-md !important;
+  }
+}
+
+.mat-card-header {
+  .mat-card-title {
+    color: $text-primary !important;
+    font-weight: $font-weight-semibold !important;
+    font-size: $font-size-lg !important;
+  }
+
+  .mat-card-subtitle {
+    color: $text-secondary !important;
+    font-size: $font-size-sm !important;
+  }
+}
+
+.mat-button,
+.mat-raised-button,
+.mat-flat-button,
+.mat-stroked-button {
+  border-radius: $border-radius-base !important;
+  font-weight: $font-weight-medium !important;
+  text-transform: none !important;
+  letter-spacing: $letter-spacing-normal !important;
+}
+
+.mat-fab,
+.mat-mini-fab {
+  border-radius: $border-radius-full !important;
+}
+
+.mat-form-field {
+  .mat-form-field-outline {
+    border-radius: $border-radius-base !important;
+  }
+
+  .mat-form-field-label {
+    color: $text-muted !important;
+  }
+
+  &.mat-focused .mat-form-field-label {
+    color: $color-primary-blue !important;
+  }
+}
+
+.mat-input-element {
+  color: $text-primary !important;
+  font-family: $font-family-primary !important;
+
+  &::placeholder {
+    color: $text-muted !important;
+  }
+}
+
+.mat-select {
+  color: $text-primary !important;
+  font-family: $font-family-primary !important;
+}
+
+.mat-option {
+  color: $text-primary !important;
+  font-family: $font-family-primary !important;
+
+  &:hover {
+    background-color: $bg-hover !important;
+  }
+
+  &.mat-selected {
+    background-color: $bg-selected !important;
+    color: $color-primary-green !important;
+  }
+}
+
+.mat-menu-panel {
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-lg !important;
+  border: $border-width-1 $border-style-solid $border-light;
+}
+
+.mat-menu-item {
+  color: $text-primary !important;
+  font-family: $font-family-primary !important;
+
+  &:hover {
+    background-color: $bg-hover !important;
+  }
+}
+
+.mat-dialog-container {
+  border-radius: $border-radius-lg !important;
+  box-shadow: $shadow-2xl !important;
+  background-color: $bg-primary !important;
+}
+
+.mat-dialog-title {
+  color: $text-primary !important;
+  font-weight: $font-weight-semibold !important;
+}
+
+.mat-dialog-content {
+  color: $text-primary !important;
+}
+
+.mat-snack-bar-container {
+  border-radius: $border-radius-base !important;
+  font-family: $font-family-primary !important;
+}
+
+.mat-table {
+  background-color: $bg-card !important;
+  color: $text-primary !important;
+  border-radius: $border-radius-lg !important;
+  overflow: hidden;
+  box-shadow: $shadow-sm !important;
+}
+
+.mat-header-cell {
+  color: $text-secondary !important;
+  font-weight: $font-weight-semibold !important;
+  font-size: $font-size-sm !important;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-wide;
+}
+
+.mat-cell {
+  color: $text-primary !important;
+  border-bottom-color: $border-light !important;
+}
+
+.mat-row:hover {
+  background-color: $bg-hover !important;
+}
+
+.mat-paginator {
+  background-color: $bg-card !important;
+  color: $text-primary !important;
+  border-top: $border-width-1 $border-style-solid $border-light;
+}
+
+.mat-tab-group {
+  .mat-tab-header {
+    border-bottom: $border-width-1 $border-style-solid $border-light;
+  }
+
+  .mat-tab-label {
+    color: $text-secondary !important;
+    font-weight: $font-weight-medium !important;
+    opacity: 1 !important;
+
+    &.mat-tab-label-active {
+      color: $color-primary-blue !important;
+    }
+  }
+
+  .mat-ink-bar {
+    background-color: $color-primary-blue !important;
+    height: 3px !important;
+  }
+}
+
+// Tooltip styling
+.mat-tooltip {
+  background-color: $color-gray-800 !important;
+  color: $text-inverse !important;
+  font-size: $font-size-sm !important;
+  border-radius: $border-radius-base !important;
+  font-family: $font-family-primary !important;
+}
+
+// Progress bar styling
+.mat-progress-bar {
+  border-radius: $border-radius-full !important;
+}
+
+.mat-progress-bar-fill::after {
+  background-color: $color-primary-blue !important;
+}
+
+// Checkbox styling
+.mat-checkbox-checked .mat-checkbox-background {
+  background-color: $color-primary-blue !important;
+}
+
+.mat-checkbox-indeterminate .mat-checkbox-background {
+  background-color: $color-primary-blue !important;
+}
+
+// Radio button styling
+.mat-radio-checked .mat-radio-outer-circle {
+  border-color: $color-primary-blue !important;
+}
+
+.mat-radio-checked .mat-radio-inner-circle {
+  background-color: $color-primary-blue !important;
+}
+
+// Slide toggle styling
+.mat-slide-toggle-checked .mat-slide-toggle-thumb {
+  background-color: $color-primary-blue !important;
+}
+
+.mat-slide-toggle-checked .mat-slide-toggle-bar {
+  background-color: rgba($color-primary-blue, 0.5) !important;
+}
+
+// Stepper styling
+.mat-step-header .mat-step-icon {
+  background-color: $color-primary-blue !important;
+  color: $text-inverse !important;
+}
+
+.mat-step-header .mat-step-icon-selected {
+  background-color: $color-primary-green !important;
+}
+
+// ============================================================================
+// DARK THEME SUPPORT (Future Enhancement)
+// ============================================================================
+
+// Create dark theme
+$spikerz-dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: mat.define-palette($spikerz-primary, 400),
+      accent: mat.define-palette($spikerz-accent, 400),
+      warn: mat.define-palette($spikerz-warn, 400),
+    ),
+    typography: $spikerz-typography,
+    density: 0,
+  )
+);
+
+// Dark theme class (can be toggled via Angular)
+.dark-theme {
+  @include mat.all-component-colors($spikerz-dark-theme);
+
+  background-color: #0f172a;
+  color: #f1f5f9;
+}

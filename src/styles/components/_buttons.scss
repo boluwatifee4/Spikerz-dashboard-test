@@ -1,0 +1,385 @@
+// ============================================================================
+// BUTTONS - SPIKERZ DASHBOARD
+// ============================================================================
+// Button component styles using design tokens and mixins
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+// ============================================================================
+// BASE BUTTON
+// ============================================================================
+
+.btn {
+  @include button-base;
+}
+
+// ============================================================================
+// BUTTON VARIANTS
+// ============================================================================
+
+.btn-primary {
+  @include button-primary;
+}
+
+.btn-secondary {
+  @include button-secondary;
+}
+
+.btn-ghost {
+  @include button-ghost;
+}
+
+.btn-danger {
+  @include button-danger;
+}
+
+.btn-success {
+  @include button-base;
+  background-color: $color-success;
+  color: $text-inverse;
+
+  &:hover:not(:disabled) {
+    background-color: darken($color-success, 10%);
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-success, 15%);
+  }
+}
+
+.btn-warning {
+  @include button-base;
+  background-color: $color-warning;
+  color: $text-inverse;
+
+  &:hover:not(:disabled) {
+    background-color: darken($color-warning, 10%);
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-warning, 15%);
+  }
+}
+
+.btn-info {
+  @include button-base;
+  background-color: $color-info;
+  color: $text-inverse;
+
+  &:hover:not(:disabled) {
+    background-color: darken($color-info, 10%);
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-info, 15%);
+  }
+}
+
+// ============================================================================
+// BUTTON SIZES
+// ============================================================================
+
+.btn-sm {
+  @include button-small;
+}
+
+.btn-lg {
+  @include button-large;
+}
+
+.btn-xs {
+  padding: $spacing-1 $spacing-2;
+  font-size: $font-size-xs;
+  border-radius: $border-radius-sm;
+}
+
+.btn-xl {
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-xl;
+  border-radius: $border-radius-md;
+}
+
+// ============================================================================
+// BUTTON STYLES
+// ============================================================================
+
+.btn-rounded {
+  border-radius: $border-radius-full;
+}
+
+.btn-square {
+  border-radius: 0;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-icon {
+  aspect-ratio: 1;
+  padding: $spacing-2;
+
+  &.btn-sm {
+    padding: $spacing-1;
+  }
+
+  &.btn-lg {
+    padding: $spacing-3;
+  }
+}
+
+// ============================================================================
+// BUTTON STATES
+// ============================================================================
+
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: $border-radius-full;
+    animation: spin 1s linear infinite;
+  }
+
+  &.btn-sm::after {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  &.btn-lg::after {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+// ============================================================================
+// BUTTON GROUPS
+// ============================================================================
+
+.btn-group {
+  @include flex-start;
+  border-radius: $border-radius-base;
+  overflow: hidden;
+
+  .btn {
+    border-radius: 0;
+    border-right-width: 0;
+    margin-left: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius-base;
+      border-bottom-left-radius: $border-radius-base;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius-base;
+      border-bottom-right-radius: $border-radius-base;
+      border-right-width: $border-width-1;
+    }
+
+    &:hover {
+      z-index: 1;
+    }
+  }
+}
+
+.btn-group-vertical {
+  @include flex-column;
+  border-radius: $border-radius-base;
+  overflow: hidden;
+
+  .btn {
+    border-radius: 0;
+    border-bottom-width: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius-base;
+      border-top-right-radius: $border-radius-base;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: $border-radius-base;
+      border-bottom-right-radius: $border-radius-base;
+      border-bottom-width: $border-width-1;
+    }
+
+    &:hover {
+      z-index: 1;
+    }
+  }
+}
+
+// ============================================================================
+// FLOATING ACTION BUTTON
+// ============================================================================
+
+.btn-fab {
+  @include button-primary;
+  position: fixed;
+  bottom: $spacing-6;
+  right: $spacing-6;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: $border-radius-full;
+  padding: 0;
+  box-shadow: $shadow-lg;
+  z-index: z-index("docked");
+
+  &:hover {
+    box-shadow: $shadow-xl;
+    transform: translateY(-1px);
+  }
+
+  @include responsive(sm) {
+    bottom: $spacing-4;
+    right: $spacing-4;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// ============================================================================
+// ICON BUTTONS
+// ============================================================================
+
+.btn-icon-only {
+  @include flex-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: $border-radius-base;
+
+  &.btn-sm {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &.btn-lg {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &.btn-rounded {
+    border-radius: $border-radius-full;
+  }
+}
+
+// ============================================================================
+// BUTTON WITH ICONS
+// ============================================================================
+
+.btn-with-icon {
+  @include flex-center;
+  gap: $spacing-2;
+
+  .btn-icon-left {
+    order: -1;
+  }
+
+  .btn-icon-right {
+    order: 1;
+  }
+}
+
+// ============================================================================
+// OUTLINE BUTTONS
+// ============================================================================
+
+.btn-outline {
+  background-color: transparent;
+  border: $border-width-1 $border-style-solid currentColor;
+
+  &.btn-primary {
+    color: $color-primary-blue;
+
+    &:hover:not(:disabled) {
+      background-color: $color-primary-blue;
+      color: $text-inverse;
+    }
+  }
+
+  &.btn-success {
+    color: $color-success;
+
+    &:hover:not(:disabled) {
+      background-color: $color-success;
+      color: $text-inverse;
+    }
+  }
+
+  &.btn-danger {
+    color: $color-danger;
+
+    &:hover:not(:disabled) {
+      background-color: $color-danger;
+      color: $text-inverse;
+    }
+  }
+
+  &.btn-warning {
+    color: $color-warning;
+
+    &:hover:not(:disabled) {
+      background-color: $color-warning;
+      color: $text-inverse;
+    }
+  }
+}
+
+// ============================================================================
+// LINK BUTTONS
+// ============================================================================
+
+.btn-link {
+  @include button-base;
+  background-color: transparent;
+  color: $color-primary-blue;
+  padding: $spacing-1 $spacing-2;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+
+  &:hover:not(:disabled) {
+    background-color: transparent;
+    color: darken($color-primary-blue, 15%);
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 2px;
+    text-decoration: none;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE BUTTONS
+// ============================================================================
+
+@include responsive(sm) {
+  .btn-responsive {
+    font-size: $font-size-sm;
+    padding: $spacing-2 $spacing-3;
+  }
+
+  .btn-block-mobile {
+    width: 100%;
+    justify-content: center;
+  }
+}

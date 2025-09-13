@@ -1,0 +1,505 @@
+// ============================================================================
+// MAIN STYLES - SPIKERZ DASHBOARD
+// ============================================================================
+// Senior-level SCSS architecture with proper import order
+// No hardcoded pixels - only design tokens
+
+// ============================================================================
+// 1. ABSTRACTS - Variables, Functions, Mixins
+// ============================================================================
+// Import design tokens and utilities first
+@import "abstracts/variables";
+@import "abstracts/functions";
+@import "abstracts/mixins";
+
+// ============================================================================
+// 2. VENDORS - Third-party libraries
+// ============================================================================
+// Angular Material theme MUST be imported before base styles
+@import "themes/material-theme";
+
+// ============================================================================
+// 3. BASE - Foundation styles
+// ============================================================================
+// Reset and typography establish the foundation
+@import "base/reset";
+@import "base/typography";
+
+// ============================================================================
+// 4. LAYOUT - Layout and grid systems
+// ============================================================================
+// Grid and container systems
+@import "layout/grid";
+@import "layout/containers";
+
+// ============================================================================
+// 5. COMPONENTS - Reusable UI components
+// ============================================================================
+// Component styles using our design tokens
+@import "components/buttons";
+@import "components/cards";
+
+// ============================================================================
+// 6. VENDORS OVERRIDES - Third-party customizations
+// ============================================================================
+// Material Design customizations
+@import "vendors/material-overrides";
+
+// ============================================================================
+// 7. GLOBAL UTILITIES AND OVERRIDES
+// ============================================================================
+
+// Global application styles
+body {
+  font-family: $font-family-primary;
+  background-color: $bg-secondary;
+  color: $text-primary;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Root container
+#root {
+  min-height: 100vh;
+  @include flex-column;
+}
+
+// Application container
+.app-container {
+  min-height: 100vh;
+  background-color: $bg-secondary;
+}
+
+// ============================================================================
+// UTILITY CLASSES
+// ============================================================================
+
+// Display utilities
+.d-none {
+  display: none !important;
+}
+.d-block {
+  display: block !important;
+}
+.d-inline {
+  display: inline !important;
+}
+.d-inline-block {
+  display: inline-block !important;
+}
+.d-flex {
+  display: flex !important;
+}
+.d-grid {
+  display: grid !important;
+}
+
+// Position utilities
+.position-static {
+  position: static !important;
+}
+.position-relative {
+  position: relative !important;
+}
+.position-absolute {
+  position: absolute !important;
+}
+.position-fixed {
+  position: fixed !important;
+}
+.position-sticky {
+  position: sticky !important;
+}
+
+// Width and height utilities
+.w-100 {
+  width: 100% !important;
+}
+.w-auto {
+  width: auto !important;
+}
+.h-100 {
+  height: 100% !important;
+}
+.h-auto {
+  height: auto !important;
+}
+.min-h-screen {
+  min-height: 100vh !important;
+}
+
+// Overflow utilities
+.overflow-hidden {
+  overflow: hidden !important;
+}
+.overflow-auto {
+  overflow: auto !important;
+}
+.overflow-scroll {
+  overflow: scroll !important;
+}
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+.overflow-y-auto {
+  overflow-y: auto !important;
+}
+
+// Border utilities
+.border {
+  border: $border-width-1 $border-style-solid $border-light !important;
+}
+.border-0 {
+  border: none !important;
+}
+.border-top {
+  border-top: $border-width-1 $border-style-solid $border-light !important;
+}
+.border-bottom {
+  border-bottom: $border-width-1 $border-style-solid $border-light !important;
+}
+.border-left {
+  border-left: $border-width-1 $border-style-solid $border-light !important;
+}
+.border-right {
+  border-right: $border-width-1 $border-style-solid $border-light !important;
+}
+
+// Border radius utilities
+.rounded-none {
+  border-radius: $border-radius-none !important;
+}
+.rounded-sm {
+  border-radius: $border-radius-sm !important;
+}
+.rounded {
+  border-radius: $border-radius-base !important;
+}
+.rounded-md {
+  border-radius: $border-radius-md !important;
+}
+.rounded-lg {
+  border-radius: $border-radius-lg !important;
+}
+.rounded-xl {
+  border-radius: $border-radius-xl !important;
+}
+.rounded-full {
+  border-radius: $border-radius-full !important;
+}
+
+// Shadow utilities
+.shadow-none {
+  box-shadow: none !important;
+}
+.shadow-sm {
+  box-shadow: $shadow-sm !important;
+}
+.shadow {
+  box-shadow: $shadow-base !important;
+}
+.shadow-md {
+  box-shadow: $shadow-md !important;
+}
+.shadow-lg {
+  box-shadow: $shadow-lg !important;
+}
+.shadow-xl {
+  box-shadow: $shadow-xl !important;
+}
+
+// Background utilities
+.bg-transparent {
+  background-color: transparent !important;
+}
+.bg-white {
+  background-color: $color-white !important;
+}
+.bg-gray-50 {
+  background-color: $color-gray-50 !important;
+}
+.bg-gray-100 {
+  background-color: $color-gray-100 !important;
+}
+.bg-primary {
+  background-color: $color-primary-blue !important;
+}
+.bg-success {
+  background-color: $color-success !important;
+}
+.bg-warning {
+  background-color: $color-warning !important;
+}
+.bg-danger {
+  background-color: $color-danger !important;
+}
+
+// Cursor utilities
+.cursor-pointer {
+  cursor: pointer !important;
+}
+.cursor-default {
+  cursor: default !important;
+}
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+// User select utilities
+.select-none {
+  user-select: none !important;
+}
+.select-text {
+  user-select: text !important;
+}
+.select-all {
+  user-select: all !important;
+}
+.select-auto {
+  user-select: auto !important;
+}
+
+// Pointer events utilities
+.pointer-events-none {
+  pointer-events: none !important;
+}
+.pointer-events-auto {
+  pointer-events: auto !important;
+}
+
+// ============================================================================
+// RESPONSIVE UTILITIES
+// ============================================================================
+
+// Show/hide on different screen sizes
+.show-xs {
+  display: none !important;
+}
+.show-sm {
+  display: none !important;
+}
+.show-md {
+  display: none !important;
+}
+.show-lg {
+  display: none !important;
+}
+.show-xl {
+  display: none !important;
+}
+
+@include responsive(xs) {
+  .show-xs {
+    display: block !important;
+  }
+  .hide-xs {
+    display: none !important;
+  }
+}
+
+@include responsive(sm) {
+  .show-sm {
+    display: block !important;
+  }
+  .hide-sm {
+    display: none !important;
+  }
+}
+
+@include responsive(md) {
+  .show-md {
+    display: block !important;
+  }
+  .hide-md {
+    display: none !important;
+  }
+}
+
+@include responsive(lg) {
+  .show-lg {
+    display: block !important;
+  }
+  .hide-lg {
+    display: none !important;
+  }
+}
+
+@include responsive(xl) {
+  .show-xl {
+    display: block !important;
+  }
+  .hide-xl {
+    display: none !important;
+  }
+}
+
+// ============================================================================
+// ANIMATION UTILITIES
+// ============================================================================
+
+// Transition utilities
+.transition-none {
+  transition: none !important;
+}
+.transition-all {
+  transition: $transition-all !important;
+}
+.transition-colors {
+  transition: $transition-colors !important;
+}
+.transition-opacity {
+  transition: $transition-opacity !important;
+}
+.transition-transform {
+  transition: $transition-transform !important;
+}
+
+// Duration utilities
+.duration-75 {
+  transition-duration: 75ms !important;
+}
+.duration-100 {
+  transition-duration: 100ms !important;
+}
+.duration-150 {
+  transition-duration: $transition-duration-fast !important;
+}
+.duration-200 {
+  transition-duration: 200ms !important;
+}
+.duration-250 {
+  transition-duration: $transition-duration-base !important;
+}
+.duration-300 {
+  transition-duration: 300ms !important;
+}
+.duration-350 {
+  transition-duration: $transition-duration-slow !important;
+}
+
+// Transform utilities
+.transform {
+  transform: none !important;
+}
+.rotate-0 {
+  transform: rotate(0deg) !important;
+}
+.rotate-90 {
+  transform: rotate(90deg) !important;
+}
+.rotate-180 {
+  transform: rotate(180deg) !important;
+}
+.rotate-270 {
+  transform: rotate(270deg) !important;
+}
+.scale-0 {
+  transform: scale(0) !important;
+}
+.scale-50 {
+  transform: scale(0.5) !important;
+}
+.scale-75 {
+  transform: scale(0.75) !important;
+}
+.scale-90 {
+  transform: scale(0.9) !important;
+}
+.scale-95 {
+  transform: scale(0.95) !important;
+}
+.scale-100 {
+  transform: scale(1) !important;
+}
+.scale-105 {
+  transform: scale(1.05) !important;
+}
+.scale-110 {
+  transform: scale(1.1) !important;
+}
+.scale-125 {
+  transform: scale(1.25) !important;
+}
+
+// ============================================================================
+// ACCESSIBILITY UTILITIES
+// ============================================================================
+
+// Screen reader only
+.sr-only {
+  @include visually-hidden;
+}
+
+.sr-only-focusable {
+  @include visually-hidden-focusable;
+}
+
+// Focus utilities
+.focus\:outline-none:focus {
+  outline: none !important;
+}
+.focus\:ring:focus {
+  @include focus-ring;
+}
+
+// ============================================================================
+// PRINT STYLES
+// ============================================================================
+
+@media print {
+  // Hide non-essential elements when printing
+  .no-print {
+    display: none !important;
+  }
+
+  // Ensure good contrast for printing
+  * {
+    color: black !important;
+    background-color: white !important;
+    box-shadow: none !important;
+  }
+
+  // Optimize typography for print
+  body {
+    font-size: 12pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+  }
+
+  .card,
+  .widget {
+    border: 1px solid black !important;
+    page-break-inside: avoid;
+  }
+}
+
+// ============================================================================
+// DEVELOPMENT HELPERS
+// ============================================================================
+
+// Debug mode - outline all elements
+.debug * {
+  outline: 1px solid red !important;
+}
+
+// Development-only styles
+.dev-only {
+  display: none;
+}
+
+// Show in development environment
+@if $env == "development" {
+  .dev-only {
+    display: block;
+  }
+}

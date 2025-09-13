@@ -1,0 +1,415 @@
+// ============================================================================
+// CARDS - SPIKERZ DASHBOARD
+// ============================================================================
+// Card component styles using design tokens and mixins
+
+@import "../abstracts/variables";
+@import "../abstracts/mixins";
+
+// ============================================================================
+// BASE CARD
+// ============================================================================
+
+.card {
+  @include card-base;
+}
+
+// ============================================================================
+// CARD VARIANTS
+// ============================================================================
+
+.card-elevated {
+  @include card-elevated;
+}
+
+.card-flat {
+  @include card-flat;
+}
+
+.card-compact {
+  @include card-compact;
+}
+
+.card-bordered {
+  @include card-base;
+  border: $border-width-2 $border-style-solid $border-medium;
+}
+
+.card-borderless {
+  @include card-base;
+  border: none;
+  box-shadow: none;
+}
+
+// ============================================================================
+// CARD STRUCTURE
+// ============================================================================
+
+.card-header {
+  @include flex-between;
+  padding-bottom: $spacing-4;
+  margin-bottom: $spacing-4;
+  border-bottom: $border-width-1 $border-style-solid $border-light;
+
+  &:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.card-title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+  line-height: $line-height-tight;
+}
+
+.card-subtitle {
+  font-size: $font-size-sm;
+  color: $text-secondary;
+  margin: $spacing-1 0 0 0;
+  line-height: $line-height-normal;
+}
+
+.card-actions {
+  @include flex-end;
+  gap: $spacing-2;
+}
+
+.card-body {
+  padding: 0;
+
+  &:not(:last-child) {
+    padding-bottom: $spacing-4;
+    margin-bottom: $spacing-4;
+    border-bottom: $border-width-1 $border-style-solid $border-light;
+  }
+}
+
+.card-footer {
+  padding-top: $spacing-4;
+  margin-top: $spacing-4;
+  border-top: $border-width-1 $border-style-solid $border-light;
+
+  &:first-child {
+    margin-top: 0;
+    border-top: none;
+  }
+}
+
+// ============================================================================
+// CARD SIZES
+// ============================================================================
+
+.card-sm {
+  @include card-compact;
+}
+
+.card-lg {
+  padding: $card-padding-lg;
+}
+
+.card-xl {
+  padding: $spacing-10;
+}
+
+// ============================================================================
+// STATS CARDS
+// ============================================================================
+
+.card-stat {
+  @include card-base;
+  text-align: center;
+  padding: $spacing-6 $spacing-4;
+
+  .stat-value {
+    font-size: $font-size-3xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    line-height: $line-height-tight;
+    margin-bottom: $spacing-2;
+
+    @include responsive(sm) {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  .stat-label {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    font-weight: $font-weight-medium;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    margin-bottom: $spacing-1;
+  }
+
+  .stat-change {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    @include flex-center;
+    gap: $spacing-1;
+
+    &.stat-positive {
+      color: $color-success;
+    }
+
+    &.stat-negative {
+      color: $color-danger;
+    }
+
+    &.stat-neutral {
+      color: $text-muted;
+    }
+  }
+}
+
+// ============================================================================
+// STATUS CARDS
+// ============================================================================
+
+.card-status {
+  @include card-base;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.25rem;
+    height: 100%;
+    border-radius: $border-radius-sm 0 0 $border-radius-sm;
+  }
+
+  &.card-status-success::before {
+    background-color: $color-success;
+  }
+
+  &.card-status-warning::before {
+    background-color: $color-warning;
+  }
+
+  &.card-status-danger::before {
+    background-color: $color-danger;
+  }
+
+  &.card-status-info::before {
+    background-color: $color-info;
+  }
+}
+
+// ============================================================================
+// INTERACTIVE CARDS
+// ============================================================================
+
+.card-interactive {
+  @include card-base;
+  cursor: pointer;
+  transition: all $transition-duration-base $transition-timing-ease;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:focus {
+    @include focus-ring($color-primary-blue, 4px);
+  }
+}
+
+.card-selectable {
+  @include card-interactive;
+  border: $border-width-2 $border-style-solid transparent;
+
+  &.card-selected {
+    border-color: $color-primary-blue;
+    background-color: rgba($color-primary-blue, 0.02);
+    box-shadow: $shadow-md;
+  }
+}
+
+// ============================================================================
+// CARD WITH MEDIA
+// ============================================================================
+
+.card-media {
+  @include card-base;
+  padding: 0;
+  overflow: hidden;
+
+  .card-media-image {
+    width: 100%;
+    height: 12rem;
+    object-fit: cover;
+    background-color: $color-gray-100;
+  }
+
+  .card-media-content {
+    padding: $card-padding;
+  }
+}
+
+// ============================================================================
+// CARD GRID LAYOUTS
+// ============================================================================
+
+.card-grid {
+  display: grid;
+  gap: $spacing-6;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+
+  @include responsive(md) {
+    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+    gap: $spacing-4;
+  }
+
+  @include responsive(sm) {
+    grid-template-columns: 1fr;
+    gap: $spacing-4;
+  }
+}
+
+.card-grid-dense {
+  @extend .card-grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+
+  @include responsive(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+// ============================================================================
+// LOADING CARDS
+// ============================================================================
+
+.card-loading {
+  @include card-base;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color-white, 0.6),
+      transparent
+    );
+    animation: shimmer 1.5s infinite;
+  }
+
+  .card-loading-content {
+    opacity: $opacity-30;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// ============================================================================
+// CARD OVERLAYS
+// ============================================================================
+
+.card-overlay {
+  @include card-base;
+  position: relative;
+  color: $text-inverse;
+  background: linear-gradient(
+    135deg,
+    $color-primary-blue,
+    darken($color-primary-blue, 20%)
+  );
+
+  .card-overlay-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color-black, 0.2);
+    z-index: 1;
+  }
+}
+
+// ============================================================================
+// RESPONSIVE CARDS
+// ============================================================================
+
+@include responsive(sm) {
+  .card-responsive {
+    border-radius: $border-radius-base;
+    padding: $spacing-4;
+  }
+
+  .card-header {
+    @include flex-column;
+    align-items: flex-start;
+    gap: $spacing-2;
+  }
+
+  .card-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+// ============================================================================
+// DASHBOARD SPECIFIC CARDS
+// ============================================================================
+
+.dashboard-card {
+  @include card-base;
+  height: 100%;
+  @include flex-column;
+
+  .dashboard-card-header {
+    @include flex-between;
+    margin-bottom: $spacing-4;
+    padding-bottom: $spacing-3;
+    border-bottom: $border-width-1 $border-style-solid $border-light;
+  }
+
+  .dashboard-card-body {
+    flex: 1;
+    @include flex-column;
+    justify-content: center;
+  }
+
+  .dashboard-card-metric {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: $spacing-1;
+  }
+
+  .dashboard-card-label {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing-wide;
+    font-weight: $font-weight-medium;
+  }
+}

@@ -1,0 +1,190 @@
+// ============================================================================
+// FUNCTIONS - SPIKERZ DASHBOARD
+// ============================================================================
+// Utility functions for SCSS calculations and color manipulations
+
+@import "variables";
+
+// ============================================================================
+// SPACING FUNCTIONS
+// ============================================================================
+
+// Convert pixel values to rem based on a base font size
+@function px-to-rem($pixels, $base-font-size: 16px) {
+  @return calc($pixels / $base-font-size) * 1rem;
+}
+
+// Get spacing value by multiplier
+@function spacing($multiplier) {
+  @return $spacing-4 * $multiplier;
+}
+
+// ============================================================================
+// COLOR FUNCTIONS
+// ============================================================================
+
+// Lighten color with percentage
+@function lighten-color($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Darken color with percentage
+@function darken-color($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// Create color with opacity
+@function color-alpha($color, $alpha) {
+  @return rgba($color, $alpha);
+}
+
+// Get contrasting text color for background
+@function contrasting-color(
+  $background-color,
+  $light: $color-white,
+  $dark: $color-gray-900
+) {
+  @if (lightness($background-color) > 50%) {
+    @return $dark;
+  } @else {
+    @return $light;
+  }
+}
+
+// ============================================================================
+// TYPOGRAPHY FUNCTIONS
+// ============================================================================
+
+// Calculate line height from font size
+@function line-height-from-font-size($font-size, $line-height-ratio: 1.5) {
+  @return $font-size * $line-height-ratio;
+}
+
+// Fluid typography scale
+@function fluid-type(
+  $min-size,
+  $max-size,
+  $min-vw: $breakpoint-sm,
+  $max-vw: $breakpoint-xl
+) {
+  @return calc(
+    #{$min-size} + #{strip-unit($max-size - $min-size)} *
+      ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)})
+  );
+}
+
+// Strip unit from a value
+@function strip-unit($value) {
+  @return calc($value / ($value * 0 + 1));
+}
+
+// ============================================================================
+// LAYOUT FUNCTIONS
+// ============================================================================
+
+// Calculate grid column width
+@function grid-width($columns, $total-columns: 12, $gap: $spacing-4) {
+  $percentage: calc($columns / $total-columns) * 100%;
+  $gap-offset: calc($gap * ($total-columns - 1) / $total-columns);
+  @return calc($percentage - $gap-offset);
+}
+
+// Calculate container padding
+@function container-padding($breakpoint) {
+  @if $breakpoint == sm {
+    @return $spacing-4;
+  } @else if $breakpoint == md {
+    @return $spacing-6;
+  } @else if $breakpoint == lg {
+    @return $spacing-8;
+  } @else {
+    @return $spacing-4;
+  }
+}
+
+// ============================================================================
+// UTILITY FUNCTIONS
+// ============================================================================
+
+// Deep merge maps (for theme configuration)
+@function map-deep-merge($map1, $map2) {
+  $result: $map1;
+
+  @each $key, $value in $map2 {
+    @if map-has-key($result, $key) and
+      type-of(map-get($result, $key)) ==
+      "map" and
+      type-of($value) ==
+      "map"
+    {
+      $result: map-merge(
+        $result,
+        (
+          $key: map-deep-merge(map-get($result, $key), $value),
+        )
+      );
+    } @else {
+      $result: map-merge(
+        $result,
+        (
+          $key: $value,
+        )
+      );
+    }
+  }
+
+  @return $result;
+}
+
+// Check if value exists in list
+@function contains($list, $value) {
+  @return index($list, $value) != null;
+}
+
+// Get z-index value by name
+@function z-index($layer) {
+  $z-indexes: (
+    "hide": $z-index-hide,
+    "auto": $z-index-auto,
+    "base": $z-index-base,
+    "docked": $z-index-docked,
+    "dropdown": $z-index-dropdown,
+    "sticky": $z-index-sticky,
+    "banner": $z-index-banner,
+    "overlay": $z-index-overlay,
+    "modal": $z-index-modal,
+    "popover": $z-index-popover,
+    "skiplink": $z-index-skiplink,
+    "toast": $z-index-toast,
+    "tooltip": $z-index-tooltip,
+  );
+
+  @if map-has-key($z-indexes, $layer) {
+    @return map-get($z-indexes, $layer);
+  } @else {
+    @warn "Unknown z-index layer: #{$layer}";
+    @return $z-index-base;
+  }
+}
+
+// ============================================================================
+// VALIDATION FUNCTIONS
+// ============================================================================
+
+// Validate breakpoint
+@function is-valid-breakpoint($breakpoint) {
+  $breakpoints: (xs, sm, md, lg, xl, 2xl);
+  @return contains($breakpoints, $breakpoint);
+}
+
+// Validate color
+@function is-valid-color($color) {
+  @return type-of($color) == "color";
+}
+
+// Validate size unit
+@function is-valid-size($size) {
+  $valid-units: ("px", "rem", "em", "%", "vw", "vh", "vmin", "vmax");
+  $unit: unit($size);
+  @return contains($valid-units, $unit) or $size == 0;
+}
