@@ -1,0 +1,162 @@
+<div class="network-container">
+	<svg class="network-svg" viewBox="0 0 1200 400">
+		<!-- Connection Lines (with fork for last two endpoints) -->
+		<g class="connections">
+			<!-- Straight / simple connections except fork source -->
+			<ng-container *ngFor="let connection of baseConnections">
+				<line
+					[attr.x1]="getNodePosition(connection.from).x"
+					[attr.y1]="getNodePosition(connection.from).y"
+					[attr.x2]="getNodePosition(connection.to).x"
+					[attr.y2]="getNodePosition(connection.to).y"
+					stroke="#E0E4EA"
+					stroke-width="2.5"
+					class="connection-line"
+					stroke-linecap="round"
+				/>
+			</ng-container>
+
+			<!-- Fork group -->
+			<path *ngIf="fork" [attr.d]="forkPath" stroke="#646F7D" stroke-width="2.5" fill="none" stroke-linecap="round" class="connection-line fork-trunk" />
+			<path *ngIf="fork" [attr.d]="upperBranchPath" stroke="#646F7D" stroke-width="2.5" fill="none" stroke-linecap="round" class="connection-line fork-branch" />
+			<path *ngIf="fork" [attr.d]="lowerBranchPath" stroke="#646F7D" stroke-width="2.5" fill="none" stroke-linecap="round" class="connection-line fork-branch" />
+			<!-- Arrowheads (optional) -->
+			<g *ngIf="fork" class="arrows">
+				<circle [attr.cx]="getNodePosition(fork.upperTarget).x - 8" [attr.cy]="getNodePosition(fork.upperTarget).y" r="1.5" fill="#646F7D" />
+				<circle [attr.cx]="getNodePosition(fork.lowerTarget).x - 8" [attr.cy]="getNodePosition(fork.lowerTarget).y" r="1.5" fill="#646F7D" />
+			</g>
+		</g>
+
+		<!-- Network Nodes -->
+		<g class="nodes">
+			<g *ngFor="let node of nodes" [attr.transform]="'translate(' + node.position.x + ',' + node.position.y + ')'" class="node-group" (mouseenter)="onNodeEnter(node)" (mouseleave)="onNodeLeave()">
+				<!-- Node Circle Background (hidden for user composite asset) -->
+				<circle *ngIf="node.type !== 'user'" [attr.r]="getNodeRadius(node)" [attr.fill]="getNodeFill(node)" stroke="#ffffff" stroke-width="4" class="node-circle" [class.error]="node.status === 'error'" />
+				<!-- Node Icon (Replaced with actual asset image) -->
+				<g class="node-icon">
+					<!-- For user node use full size asset replacing circle -->
+					<image *ngIf="node.type === 'user'" [attr.href]="getNodeIcon(node)" [attr.xlink:href]="getNodeIcon(node)" [attr.x]="-getNodeRadius(node)" [attr.y]="-getNodeRadius(node)" [attr.width]="getNodeRadius(node) * 2" [attr.height]="getNodeRadius(node) * 2" preserveAspectRatio="xMidYMid meet"></image>
+					<!-- Inner icon for other types -->
+					<image *ngIf="node.type !== 'user'" [attr.href]="getNodeIcon(node)" [attr.xlink:href]="getNodeIcon(node)" [attr.x]="-getNodeRadius(node) * 0.55" [attr.y]="-getNodeRadius(node) * 0.55" [attr.width]="getNodeRadius(node) * 1.1" [attr.height]="getNodeRadius(node) * 1.1" preserveAspectRatio="xMidYMid meet"></image>
+				</g>
+
+				<!-- Status Badge (error only; user asset already contains badge) -->
+				<g *ngIf="node.status === 'error' && node.type !== 'user'" class="status-badge" [attr.transform]="'translate(' + (getNodeRadius(node)-10) + ',' + (-getNodeRadius(node)+10) + ')'">
+					<circle r="12" [attr.fill]="node.status === 'error' ? '#DC3D3D' : '#5B4CCE'"></circle>
+					<g *ngIf="node.status === 'error'">
+						<line x1="-5" y1="-5" x2="5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round" />
+						<line x1="5" y1="-5" x2="-5" y2="5" stroke="white" stroke-width="2" stroke-linecap="round" />
+					</g>
+				</g>
+
+				<!-- Node Label -->
+				<text [attr.y]="getNodeRadius(node) + 20" text-anchor="middle" class="node-label" fill="#374151" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600">{{ node.label }}</text>
+
+				<!-- IP Address (if available) -->
+				<text *ngIf="node.metadata?.ip" [attr.y]="getNodeRadius(node) + 38" text-anchor="middle" class="node-ip" fill="#6b7280" font-family="system-ui, -apple-system, sans-serif" font-size="13">{{ node.metadata?.ip }}</text>
+			</g>
+		</g>
+	</svg>
+
+	<!-- Hover Tooltip/Component -->
+	<div *ngIf="hoveredNode" class="node-tooltip" [ngClass]="{'user-tooltip': hoveredNode.id==='user'}" [style.left.px]="tooltipPosition.x" [style.top.px]="tooltipPosition.y">
+		<!-- Variant Popovers -->
+		<ng-container [ngSwitch]="hoveredNode.id">
+			<!-- 1. User variant (compact redesign) -->
+			<div *ngSwitchCase="'user'" class="popover popover-user user-compact">
+				<div class="user-compact-title">{{ hoveredNode.metadata?.titleBar || (hoveredNode.label | titlecase) }}</div>
+				<div class="user-compact-grid">
+					<ng-container *ngFor="let p of (hoveredNode.metadata?.pills1 || []); let i = index">
+						<span class="user-compact-pill">{{p}}</span>
+					</ng-container>
+					<ng-container *ngFor="let p of (hoveredNode.metadata?.pills2 || []); let i = index">
+						<span class="user-compact-pill">{{p}}</span>
+					</ng-container>
+				</div>
+				<div class="user-compact-footer" *ngIf="hoveredNode.metadata?.code">{{ hoveredNode.metadata?.code }}</div>
+			</div>
+
+			<!-- 2. Server1 variant (design 2) -->
+			<div *ngSwitchCase="'server1'" class="popover popover-server">
+				<div class="node-row">
+					<div class="icon-col">
+						<img src="assets/icons/status/stack-bars.svg" class="inline-node-icon" alt="server" />
+					</div>
+					<div class="header-text">
+						<div class="label-strong">{{ hoveredNode.label }}</div>
+					</div>
+				</div>
+				<div class="section">
+					<div class="line"><span class="icon-doc"></span><span class="label-strong">Lorem:</span> <span class="label-strong">Loremipsum Loremipsum</span> <span class="pill pill-purple align-right" *ngIf="hoveredNode.metadata?.code">{{ hoveredNode.metadata?.code }}</span></div>
+					<div class="pill-row">
+						<span *ngFor="let p of hoveredNode.metadata?.pills1" class="pill pill-purple">{{p}}</span>
+						<span class="label-strong">Loremipsum</span>
+						<span *ngFor="let p of hoveredNode.metadata?.pills2" class="pill pill-purple">{{p}}</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- 3. Server2 variant (compact redesign) -->
+			<div *ngSwitchCase="'server2'" class="popover popover-server2-compact">
+				<div class="s2-header">
+					<img src="assets/icons/status/stack-bars.svg" class="s2-icon" alt="server" />
+					<div class="s2-label">{{ hoveredNode.label }}</div>
+				</div>
+				<div class="s2-log">
+					<span class="icon-doc small"></span><span class="s2-strong">Lorem:</span>
+					<span class="s2-yellow">Lorem</span>
+					<span class="s2-green">“Ipsum”</span>
+					<span class="s2-green">{{ hoveredNode.metadata?.highlightB }}</span>
+					<span class="s2-strong">Loremipsum Loremipsum</span>
+				</div>
+				<div class="s2-pills-row first">
+					<span *ngFor="let p of hoveredNode.metadata?.pills1" class="s2-pill purple">{{p}}</span>
+					<span class="s2-strong">Loremipsum</span>
+					<span *ngFor="let p of hoveredNode.metadata?.pills2" class="s2-pill purple">{{p}}</span>
+				</div>
+				<div class="s2-log second">
+					<span class="icon-doc small"></span><span class="s2-strong">Lorem:</span>
+					<span class="s2-yellow">Lorem</span>
+					<span class="s2-green">“Ipsum”</span>
+					<span class="s2-strong">Loremipsum Loremipsum</span>
+				</div>
+				<div class="s2-pills-row second">
+					<span *ngFor="let p of hoveredNode.metadata?.altPills" class="s2-pill purple">{{p}}</span>
+					<span class="s2-code-pill" *ngIf="hoveredNode.metadata?.code">{{ hoveredNode.metadata?.code }}</span>
+				</div>
+			</div>
+
+			<!-- 4. Endpoint1 variant (design 5 without blue outline) -->
+			<div *ngSwitchCase="'endpoint1'" class="popover popover-endpoint" [class.error]="hoveredNode.status==='error'">
+				<div class="endpoint-header">
+					<div class="endpoint-icon-wrapper">
+						<img src="assets/icons/status/unprotected-bar.svg" class="endpoint-icon" alt="endpoint" />
+						<div class="error-badge" *ngIf="hoveredNode.status==='error'"><div class="x"></div></div>
+					</div>
+					<div class="endpoint-head-text">
+						<div class="endpoint-label">{{ hoveredNode.label }}</div>
+						<div class="endpoint-ip" *ngIf="hoveredNode.metadata?.ip">{{ hoveredNode.metadata?.ip }}</div>
+					</div>
+				</div>
+				<div class="log-line"><span class="icon-doc"></span><span class="label-strong">Lorem:</span> <span class="highlight-yellow">Lorem “Ipsum"</span></div>
+				<div class="second-line"><span class="label-strong">Loremipsum</span> <span class="pill pill-blue">{{ hoveredNode.metadata?.code }}</span></div>
+			</div>
+
+			<!-- 5. Endpoint2 variant (design 4 simplified) -->
+			<div *ngSwitchCase="'endpoint2'" class="popover popover-endpoint" [class.error]="hoveredNode.status==='error'">
+				<div class="endpoint-header">
+					<div class="endpoint-icon-wrapper">
+						<img src="assets/icons/status/unprotected-bar.svg" class="endpoint-icon" alt="endpoint" />
+						<div class="error-badge" *ngIf="hoveredNode.status==='error'"><div class="x"></div></div>
+					</div>
+					<div class="endpoint-head-text">
+						<div class="endpoint-label">{{ hoveredNode.label }}</div>
+						<div class="endpoint-ip" *ngIf="hoveredNode.metadata?.ip">{{ hoveredNode.metadata?.ip }}</div>
+					</div>
+				</div>
+				<div class="log-line"><span class="icon-doc"></span><span class="label-strong">Lorem:</span> <span class="highlight-yellow">Lorem “Ipsum"</span></div>
+				<div class="second-line"><span class="label-strong">Loremipsum</span> <span class="pill pill-blue">{{ hoveredNode.metadata?.code }}</span></div>
+			</div>
+		</ng-container>
+	</div>
+</div>

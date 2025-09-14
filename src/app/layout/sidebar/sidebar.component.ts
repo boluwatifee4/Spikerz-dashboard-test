@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 interface NavigationItem {
@@ -13,7 +14,7 @@ interface NavigationItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule, MatTooltipModule],
+  imports: [CommonModule, MatTooltipModule, RouterLink],
   template: `
     <aside
       class="sidebar"
@@ -48,7 +49,8 @@ interface NavigationItem {
         <ul class="nav-list">
           <li *ngFor="let item of navigationItems(); trackBy: trackByItemId" class="nav-item">
             <a
-              [href]="item.route || '#'"
+              *ngIf="item.route; else noRoute"
+              [routerLink]="item.route"
               class="nav-link"
               [class.active]="item.isActive"
               matTooltip="{{ item.label }}"
@@ -62,6 +64,23 @@ interface NavigationItem {
                 class="nav-icon">
               <span class="nav-text" *ngIf="!isCollapsed">{{ item.label }}</span>
             </a>
+            <ng-template #noRoute>
+              <a
+                href="#"
+                class="nav-link"
+                [class.active]="item.isActive"
+                matTooltip="{{ item.label }}"
+                matTooltipClass="sidebar-tooltip"
+                [matTooltipDisabled]="!isCollapsed"
+                matTooltipPosition="right"
+                (click)="onNavItemClick(item, $event)">
+                <img
+                  [src]="'assets/icons/sidebar/' + item.icon"
+                  [alt]="item.label + ' icon'"
+                  class="nav-icon">
+                <span class="nav-text" *ngIf="!isCollapsed">{{ item.label }}</span>
+              </a>
+            </ng-template>
           </li>
         </ul>
 

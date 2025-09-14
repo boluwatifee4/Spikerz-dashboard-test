@@ -10,7 +10,7 @@
   display: flex;
   align-items: flex-start; // allow independent vertical growth
   justify-content: flex-start;
-  min-height: 100vh;
+  min-height: 100dvh; // dynamic viewport to avoid iOS shrink issues
   background-color: $bg-secondary;
   position: relative;
   width: 100%;
@@ -19,12 +19,18 @@
 .main-content {
   flex: 1;
   margin-left: $sidebar-width;
-  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain; // prevent body scroll chaining
   transition: margin-left $transition-duration-base $transition-timing-ease;
   background-color: $bg-secondary;
   box-sizing: border-box; // ensure internal elements calculate width correctly
   width: 100%;
-  // Width & padding handled by inner .content-wrapper for consistent spacing
+  scroll-padding-top: $spacing-6; // in case of anchor links
+  -webkit-overflow-scrolling: touch;
+  // hide scrollbars if thin
+  scrollbar-gutter: stable both-edges;
 
   &.sidebar-collapsed {
     margin-left: $sidebar-width-collapsed; // Updated to use the variable
@@ -32,25 +38,37 @@
 
   // On small screens we don't reserve horizontal space; sidebar will overlay
   @include responsive-down(md) {
-    margin-left: 0;
-
+    margin-left: 0; // sidebar overlays
+    max-height: 100dvh;
+    min-height: 100dvh;
     &.sidebar-collapsed {
       margin-left: 0;
+    }
+    &.sidebar-open,
+    &.mobile.sidebar-open,
+    &[data-mobile="true"].sidebar-open {
+      margin-left: $sidebar-width-collapsed !important; // enforce shift
+      pointer-events: auto;
     }
   }
 }
 
 .content-wrapper {
-  padding: $spacing-7; // moved from main-content
+  padding: $spacing-7 env(safe-area-inset-right) $spacing-7
+    env(safe-area-inset-left); // account for notches
   max-width: 100%;
   width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 
   @include responsive(lg) {
     padding: $spacing-8;
   }
 
   @include responsive(sm) {
-    padding: $spacing-4;
+    padding: $spacing-4 env(safe-area-inset-right) $spacing-5
+      env(safe-area-inset-left);
   }
 }
 
@@ -82,4 +100,24 @@
   .layout-container {
     flex-direction: column;
   }
+  // Prevent body double scroll when sidebar open
+  body.sidebar-active {
+    overflow: hidden;
+    touch-action: none;
+  }
+}
+
+// Hide scrollbars in webkit subtly
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+.main-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.main-content::-webkit-scrollbar-thumb {
+  background: rgba($color-gray-400, 0.4);
+  border-radius: $border-radius-full;
+}
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: rgba($color-gray-500, 0.55);
 }

@@ -18,7 +18,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
       <!-- Main Content Area -->
       <main
         class="main-content"
-        [class.sidebar-collapsed]="isSidebarCollapsed()">
+        [attr.data-mobile]="isMobile() ? 'true' : 'false'"
+        [class.sidebar-collapsed]="isSidebarCollapsed()"
+        [class.sidebar-open]="!isSidebarCollapsed() && isMobile()"
+        [class.mobile]="isMobile()">
         <div class="content-wrapper">
           <!-- Router outlet will go here for different pages -->
           <ng-content></ng-content>

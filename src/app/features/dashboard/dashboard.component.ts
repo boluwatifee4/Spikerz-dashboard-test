@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ServerAccordionItem, ServerAccordionItemComponent } from '../../shared/components/server-accordion-item/server-accordion-item.component';
 import { NgxGraphModule, DagreNodesOnlyLayout } from '@swimlane/ngx-graph';
 import * as shape from 'd3-shape';
-import { NetworkDiagramComponent } from '../../shared/test.component';
+import { NetworkDiagramComponent } from '../../core/components/network-diagram/network-diagram.component';
 
 @Component({
   selector: 'app-dashboard',

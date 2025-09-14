@@ -1,22 +1,24 @@
 @import "../../../styles/abstracts/variables";
 @import "../../../styles/abstracts/mixins";
 
-// Two-panel dashboard layout (no visual design embellishments beyond structure)
-
-.dashboard-layout {
+.entity-dashboard {
   display: grid;
-  grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr); // 35% / 65%
-  gap: $spacing-2 + $spacing-1; // 10px equivalent (8 + 4 = 12, adjust) -> create custom token below
-  gap: 0.625rem; // 10px explicit because design calls for exact 10px
-  align-items: start;
   width: 100%;
+  gap: 0.625rem;
+  align-items: start;
+  grid-template-columns: 1fr;
+  padding: 1rem;
+}
+@media (min-width: $breakpoint-md) {
+  .entity-dashboard {
+    grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+    padding: 0;
+  }
 }
 
-// Optional: tokenization for exact spec (kept local to avoid polluting global scale)
-$dashboard-gap: 0.625rem; // 10px
-$dashboard-panel-radius: 0.9375rem; // 15px
-$dashboard-panel-padding-x: 1.25rem; // 20px
-$dashboard-panel-padding-y: 1.875rem; // 30px
+$dashboard-panel-radius: 0.9375rem;
+$dashboard-panel-padding-x: 1.25rem;
+$dashboard-panel-padding-y: 1.875rem;
 
 .panel {
   background: $bg-primary;
@@ -25,33 +27,24 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
   display: flex;
   flex-direction: column;
   min-height: 0;
-  box-shadow: none; // keep flat per request (no design embellishment yet)
+  box-shadow: none;
 }
 
-.panel-left {
-  width: 100%; // grid controls width
-}
-
+.panel-left,
 .panel-right {
   width: 100%;
 }
 
-// Basic placeholders (will be replaced later)
 .panel-title {
   font-size: $font-size-base;
   font-weight: $font-weight-medium;
   margin: 0 0 $spacing-4;
 }
-
 .panel-placeholder {
   font-size: $font-size-sm;
   color: $text-muted;
   margin: 0;
 }
-
-// ============================================================================
-// LEFT PANEL (Entity Details) STYLES
-// ============================================================================
 
 .entity-details {
   .section-heading {
@@ -76,7 +69,7 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
     border: 0;
     height: 1px;
     background: $border-light;
-    margin: $spacing-6 0 $spacing-6;
+    margin: $spacing-6 0;
   }
 
   .meta-grid {
@@ -88,7 +81,7 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
 
   .meta-row {
     display: grid;
-    grid-template-columns: auto 1fr; // label size to content, value takes rest
+    grid-template-columns: auto 1fr;
     column-gap: $spacing-8;
     row-gap: $spacing-1;
     align-items: start;
@@ -132,37 +125,254 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
   }
 }
 
-// Responsive: stack on smaller widths
-@media (max-width: 960px) {
-  .dashboard-layout {
+@media (max-width: $breakpoint-md) {
+  .entity-dashboard {
     grid-template-columns: 1fr;
-    gap: $dashboard-gap;
+    gap: $spacing-4;
+    max-width: none;
+    padding: $spacing-3;
+  }
+  .panel-left,
+  .panel-right {
+    width: 100%;
+    margin-bottom: $spacing-4;
   }
 }
 
-// ============================================================================
-// RIGHT PANEL STYLES
-// ============================================================================
+// Tablet and small desktop adjustments
+@media (max-width: 1280px) and (min-width: $breakpoint-md) {
+  .panel-right .risk-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small mobile devices (576px and below)
+@media (max-width: $breakpoint-sm) {
+  .panel {
+    padding: ($dashboard-panel-padding-y * 0.6)
+      ($dashboard-panel-padding-x * 0.6);
+    border-radius: $border-radius-md;
+  }
+  .entity-dashboard {
+    gap: $spacing-3;
+  }
+  .entity-details .section-heading,
+  .panel-right .section-heading.secondary {
+    font-size: 1.1rem;
+  }
+  .panel-right .flow-chart-card,
+  .panel-right .card {
+    padding: $spacing-4;
+  }
+  .panel-right .status-legend {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-3;
+  }
+  .panel-right .risk-summary {
+    grid-template-columns: 1fr;
+    gap: $spacing-4;
+  }
+  .panel-right .risk-ring {
+    margin: 0 auto;
+    width: 7rem;
+    height: 7rem;
+  }
+  .entity-details .meta-row {
+    grid-template-columns: 1fr;
+    row-gap: $spacing-1;
+  }
+}
+
+// Very small mobile devices (320px and below)
+@media (max-width: 480px) {
+  .entity-dashboard {
+    gap: $spacing-2;
+  }
+  .panel {
+    padding: $spacing-4 $spacing-3;
+    border-radius: $border-radius-base;
+  }
+  .entity-details .section-heading,
+  .panel-right .section-heading.secondary {
+    font-size: 1rem;
+    margin-bottom: $spacing-3;
+  }
+  .panel-right .flow-chart-card,
+  .panel-right .card {
+    padding: $spacing-3;
+  }
+  .panel-right .legend-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .panel-right .legend-item img {
+    width: 1rem;
+    height: 1rem;
+  }
+  .panel-right .assets-table thead th,
+  .panel-right .assets-table tbody td {
+    padding: $spacing-2 $spacing-3;
+    font-size: 0.75rem;
+  }
+  .panel-right .asset-cell {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $spacing-2;
+  }
+  .panel-right .asset-icon-wrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+  .panel-right .risk-ring {
+    width: 5.5rem;
+    height: 5.5rem;
+    border-width: 0.3rem;
+  }
+  .panel-right .ring-value {
+    font-size: 1.2rem;
+  }
+  .entity-details .body-text,
+  .panel-right .risk-list {
+    font-size: 0.75rem;
+  }
+}
+
+// Enhanced responsive system
+
+// Root adjustments for large screens
+@media (min-width: $breakpoint-xl) {
+  .entity-dashboard {
+    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+  }
+}
+
+// Medium refinement between md and lg
+@media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+  .entity-dashboard {
+    grid-template-columns: 0.44fr 0.56fr;
+  }
+}
+
+// Collapse risk panels earlier on narrow desktops
+@media (max-width: 1100px) {
+  .panel-right .risk-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Tablet portrait adjustments
+@media (max-width: $breakpoint-md) {
+  .entity-dashboard {
+    grid-template-columns: 1fr;
+    max-width: 58rem;
+    margin-inline: auto;
+  }
+  .panel {
+    border-radius: $border-radius-lg;
+  }
+  .panel-right .flow-chart-card {
+    margin-bottom: $spacing-5;
+  }
+  .panel-right .status-legend {
+    gap: $spacing-6;
+  }
+  .panel-right .risk-panels {
+    gap: $spacing-5;
+  }
+}
+
+// Narrow tablet / large phone landscape
+@media (max-width: 700px) {
+  .panel-right .legend-item {
+    flex: 1 1 calc(50% - $spacing-4);
+  }
+  .panel-right .status-legend {
+    gap: $spacing-4;
+  }
+  .panel-right .risk-summary {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Small phones
+@media (max-width: 380px) {
+  .panel-right .legend-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  .panel-right .legend-item img {
+    width: 1rem;
+    height: 1rem;
+  }
+  .panel-right .ring-value {
+    font-size: 1.4rem;
+  }
+  .panel-right .risk-ring {
+    width: 6rem;
+    height: 6rem;
+    border-width: 0.35rem;
+  }
+}
+
+// Fluid typography helpers
+:root {
+  --dash-heading-scale: clamp(1.15rem, 1rem + 1vw, 1.4rem);
+  --dash-subheading-scale: clamp(1rem, 0.9rem + 0.7vw, 1.2rem);
+}
+.entity-details .section-heading,
+.panel-right .section-heading.secondary {
+  font-size: var(--dash-heading-scale);
+}
+.panel-right .risk-title {
+  font-size: var(--dash-subheading-scale);
+}
+
+// Table horizontal overflow protection
+.panel-right .assets-card {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.panel-right .assets-table {
+  min-width: 32rem;
+}
+
+// Utility responsive classes (scoped locally)
+.dashboard-hide-mobile {
+  display: none;
+}
+@media (min-width: $breakpoint-sm) {
+  .dashboard-hide-mobile {
+    display: initial;
+  }
+}
+.dashboard-show-desktop {
+  display: initial;
+}
+@media (max-width: $breakpoint-sm) {
+  .dashboard-show-desktop {
+    display: none;
+  }
+}
 
 .panel-right {
-  // Unified flow chart + legend card
   .flow-chart-card {
     @extend .card;
-    padding: $spacing-6; // consistent internal spacing
+    padding: $spacing-6;
     display: flex;
     flex-direction: column;
     border-radius: $border-radius-xl;
-    border: none; // remove default card border if present
-    box-shadow: none; // no shadow per visual
-    gap: 0; // manage with specific elements
+    border: none;
+    box-shadow: none;
+    gap: 0;
     background: $color-gray-50 !important;
-    margin-bottom: $spacing-6; // space before divider
+    margin-bottom: $spacing-6;
   }
 
   // Custom graph node styling
   .entity-flow-graph {
     width: 100%;
-    height: 18rem; // provisional height matching design space
+    height: 18rem;
   }
   .flow-node {
     display: flex;
@@ -179,12 +389,12 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
       img {
         width: 70%;
         height: 70%;
         object-fit: contain;
       }
-      position: relative;
     }
     &.is-critical .circle {
       background: rgba($color-primary-red, 0.12);
@@ -206,7 +416,7 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
     @include flex-center;
     font-size: $font-size-sm;
     color: $text-muted;
-    margin: 0 0 $spacing-6; // space before divider
+    margin: 0 0 $spacing-6;
   }
 
   .flow-legend-divider {
@@ -220,7 +430,7 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
   .status-legend {
     list-style: none;
     padding: 0;
-    margin: 0; // already spaced by divider
+    margin: 0;
     display: flex;
     gap: $spacing-10;
     align-items: center;
@@ -379,7 +589,7 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
   // Risk summary card
   .risk-summary {
     display: grid;
-    grid-template-columns: 1fr auto; // list | ring
+    grid-template-columns: 1fr auto;
     gap: $spacing-6 $spacing-8;
     align-items: start;
   }
