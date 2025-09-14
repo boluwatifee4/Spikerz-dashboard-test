@@ -42,7 +42,9 @@
 // SIDEBAR CONTAINER
 // ============================================================================
 
-.sidebar {
+// Note: Component-specific sidebar styles are handled in sidebar.component.scss
+// These global styles are for general sidebar containers if needed elsewhere
+.sidebar-container {
   width: $sidebar-width;
   height: 100vh;
   background-color: $bg-primary;
@@ -81,10 +83,6 @@
   &.sidebar-overlay-active {
     opacity: 1;
     visibility: visible;
-  }
-
-  @include responsive(lg) {
-    display: none;
   }
 }
 

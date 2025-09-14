@@ -16,7 +16,7 @@
 // 2. VENDORS - Third-party libraries
 // ============================================================================
 // Angular Material theme MUST be imported before base styles
-@import "themes/material-theme";
+// @use "themes/material-theme" as *; // Temporarily disabled
 
 // ============================================================================
 // 3. BASE - Foundation styles
@@ -497,9 +497,10 @@ body {
   display: none;
 }
 
-// Show in development environment
-@if $env == "development" {
-  .dev-only {
-    display: block;
-  }
-}
+// For now, we'll keep development styles disabled
+// TODO: Set up environment variable handling
+// @if $env == "development" {
+//   .dev-only {
+//     display: block;
+//   }
+// }

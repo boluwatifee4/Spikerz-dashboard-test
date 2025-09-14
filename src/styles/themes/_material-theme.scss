@@ -4,7 +4,7 @@
 // Custom Angular Material theme using our design tokens
 
 @use "@angular/material" as mat;
-@import "../abstracts/variables";
+@use "../abstracts/variables" as *;
 
 // ============================================================================
 // DEFINE CUSTOM PALETTES
@@ -119,90 +119,7 @@ $spikerz-warn: (
 // CREATE THEME CONFIGURATION
 // ============================================================================
 
-// Define typography configuration
-$spikerz-typography: mat.define-typography-config(
-  $font-family: $font-family-primary,
-  $headline-1:
-    mat.define-typography-level(
-      $font-size-4xl,
-      $line-height-tight,
-      $font-weight-bold
-    ),
-  $headline-2:
-    mat.define-typography-level(
-      $font-size-3xl,
-      $line-height-tight,
-      $font-weight-bold
-    ),
-  $headline-3:
-    mat.define-typography-level(
-      $font-size-2xl,
-      $line-height-snug,
-      $font-weight-semibold
-    ),
-  $headline-4:
-    mat.define-typography-level(
-      $font-size-xl,
-      $line-height-snug,
-      $font-weight-semibold
-    ),
-  $headline-5:
-    mat.define-typography-level(
-      $font-size-lg,
-      $line-height-normal,
-      $font-weight-medium
-    ),
-  $headline-6:
-    mat.define-typography-level(
-      $font-size-base,
-      $line-height-normal,
-      $font-weight-medium
-    ),
-  $subtitle-1:
-    mat.define-typography-level(
-      $font-size-base,
-      $line-height-normal,
-      $font-weight-medium
-    ),
-  $subtitle-2:
-    mat.define-typography-level(
-      $font-size-sm,
-      $line-height-normal,
-      $font-weight-medium
-    ),
-  $body-1:
-    mat.define-typography-level(
-      $font-size-base,
-      $line-height-relaxed,
-      $font-weight-regular
-    ),
-  $body-2:
-    mat.define-typography-level(
-      $font-size-sm,
-      $line-height-normal,
-      $font-weight-regular
-    ),
-  $caption:
-    mat.define-typography-level(
-      $font-size-xs,
-      $line-height-normal,
-      $font-weight-regular
-    ),
-  $button:
-    mat.define-typography-level(
-      $font-size-base,
-      $line-height-tight,
-      $font-weight-medium
-    ),
-  $overline:
-    mat.define-typography-level(
-      $font-size-xs,
-      $line-height-normal,
-      $font-weight-medium
-    ),
-);
-
-// Create the theme
+// Create the theme without custom typography for now
 $spikerz-theme: mat.define-light-theme(
   (
     color: (

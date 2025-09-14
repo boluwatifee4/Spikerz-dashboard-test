@@ -1,0 +1,376 @@
+// ============================================================================
+// SIDEBAR COMPONENT STYLES
+// ============================================================================
+// Navigation sidebar with toggle functionality
+
+@import "../../../styles/abstracts/variables";
+@import "../../../styles/abstracts/mixins";
+
+// Sidebar container
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: $sidebar-width;
+  height: 100vh;
+  background-color: $bg-primary;
+  border-right: 1px solid $color-gray-200;
+  @include flex-column;
+  transition: all $transition-duration-base $transition-timing-ease;
+  z-index: 1000;
+  overflow: visible; // allow toggle button to protrude
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: $spacing-6 $spacing-4;
+
+  &.collapsed {
+    width: $sidebar-width-collapsed;
+    min-width: $sidebar-width-collapsed;
+    padding: $spacing-6 $spacing-2;
+  }
+
+  @include responsive(md) {
+    z-index: 1050;
+    box-shadow: $shadow-lg;
+
+    &:not(.mobile-hidden) {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Toggle Button (always visible on border)
+.sidebar-toggle {
+  position: absolute;
+  top: $spacing-6;
+  right: -12px; // half outside, half inside
+  width: $spacing-6;
+  height: $spacing-6;
+  background-color: $bg-deep-primary;
+  border: none;
+  border-radius: $border-radius-full;
+  @include flex-center;
+  cursor: pointer;
+  transition: $transition-all;
+  z-index: 1010; // above sidebar
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    background-color: darken($color-primary-green, 5%);
+    box-shadow: $shadow-md;
+    right: -10px; // subtle shift
+  }
+
+  &:focus {
+    outline: 2px solid rgba($color-primary-green, 0.35);
+    outline-offset: 2px;
+  }
+
+  .toggle-icon {
+    color: $color-white;
+    width: 1rem;
+    height: 1rem;
+    transition: transform $transition-duration-base $transition-timing-ease;
+  }
+
+  &.collapsed .toggle-icon {
+    transform: rotate(180deg);
+  }
+}
+
+// Navigation
+.sidebar-nav {
+  @include flex-column;
+  flex: 1;
+  gap: $spacing-2;
+  overflow-y: auto;
+  margin-top: $spacing-8; // Add space for toggle button
+
+  .sidebar.collapsed & {
+    padding: 0;
+    margin-top: $spacing-12; // More space when collapsed
+  }
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @include flex-column;
+  gap: $spacing-1;
+}
+
+.nav-item {
+  width: 100%;
+  padding: 0;
+
+  .sidebar.collapsed & {
+    padding: 0 $spacing-1; // Reduced padding for better centering
+  }
+}
+
+.nav-link {
+  @include flex-start;
+  gap: $spacing-3;
+  padding: $spacing-3 $spacing-4;
+  border-radius: $border-radius-md;
+  color: $color-gray-600;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+  transition: $transition-all;
+  position: relative;
+  width: 100%;
+  min-height: 2.75rem;
+
+  &:hover {
+    background-color: $color-gray-50;
+    color: $color-gray-900;
+  }
+
+  &.active {
+    background-color: $color-active;
+
+    .nav-icon {
+      filter: brightness(0) saturate(100%) invert(55%) sepia(73%)
+        saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+    }
+  }
+
+  &:focus {
+    outline: 2px solid rgba($color-primary-blue, 0.3);
+    outline-offset: -2px;
+    border-radius: $border-radius-md;
+  }
+
+  .sidebar.collapsed & {
+    padding: $spacing-3 $spacing-1;
+    justify-content: center;
+    border-radius: $border-radius-md;
+    position: relative;
+    min-height: $spacing-12;
+    width: 100%;
+  }
+
+  &.sub-item {
+    font-size: $font-size-sm;
+    color: $color-gray-500;
+
+    .sidebar.collapsed & {
+      padding: $spacing-3;
+      justify-content: center;
+    }
+  }
+}
+
+.nav-icon {
+  width: $spacing-4;
+  height: $spacing-4;
+}
+
+.nav-text {
+  font-size: $font-size-sm;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity $transition-duration-fast $transition-timing-ease;
+
+  .sidebar.collapsed & {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+  }
+}
+
+// Settings Section
+.settings-section {
+  border-top: 1px solid $color-gray-200;
+  padding-top: $spacing-4;
+  margin-top: auto;
+}
+
+// User Section
+.user-section {
+  @include flex-between;
+  gap: $spacing-3;
+  padding: $spacing-4;
+  padding-left: 0;
+  margin-top: auto;
+  border-top: 1px solid $color-gray-200;
+  background-color: $bg-primary;
+}
+
+.user-info {
+  @include flex-start;
+  gap: $spacing-3;
+  flex: 1;
+  min-width: 0;
+}
+
+.user-avatar {
+  width: $spacing-12;
+  height: $spacing-12;
+  border-radius: $border-radius-full;
+  flex-shrink: 0;
+  background-color: $color-gray-300;
+}
+
+.user-details {
+  @include flex-column;
+  gap: $spacing-1;
+  min-width: 0;
+}
+
+.user-name {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-gray-900;
+  @include text-truncate;
+}
+
+.user-subtitle {
+  font-size: $font-size-xs;
+  color: $color-gray-500;
+  @include text-truncate;
+}
+
+.sign-out-btn {
+  @include flex-center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  background: transparent;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: $transition-all;
+  flex-shrink: 0;
+
+  &:hover {
+    background-color: $color-gray-50;
+  }
+
+  &:focus {
+    outline: 2px solid rgba($color-primary-blue, 0.3);
+    outline-offset: -2px;
+  }
+}
+
+.sign-out-icon {
+  width: 1rem;
+  height: 1rem;
+  filter: brightness(0) saturate(100%) invert(45%) sepia(10%) saturate(1006%)
+    hue-rotate(183deg) brightness(95%) contrast(92%);
+}
+
+// Collapsed User Section
+.user-section-collapsed {
+  @include flex-center;
+  padding: $spacing-4 $spacing-2;
+  margin-top: auto;
+  border-top: 1px solid $color-gray-200;
+}
+
+.user-avatar-btn {
+  @include flex-center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: transparent;
+  border-radius: $border-radius-full;
+  cursor: pointer;
+  transition: $transition-all;
+  position: relative;
+
+  &:hover {
+    background-color: $color-gray-50;
+  }
+
+  &:focus {
+    outline: 2px solid rgba($color-primary-blue, 0.3);
+    outline-offset: -2px;
+  }
+
+  // Tooltip handled by Angular Material (matTooltip)
+}
+
+.user-avatar-small {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: $border-radius-full;
+  background-color: $color-gray-300;
+}
+
+// Scrollbar styling for sidebar
+.sidebar-nav {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $color-gray-300;
+    border-radius: $border-radius-full;
+
+    &:hover {
+      background: $color-gray-400;
+    }
+  }
+}
+
+// Mobile specific styles
+@include responsive(md) {
+  .sidebar {
+    .nav-text {
+      opacity: 1;
+      width: auto;
+    }
+
+    &.collapsed .nav-text {
+      opacity: 1;
+      width: auto;
+    }
+  }
+}
+
+// Animation for mobile sidebar
+@media (max-width: 768px) {
+  .sidebar {
+    &:not(.mobile-hidden) {
+      animation: slideInLeft $transition-duration-base $transition-timing-ease;
+    }
+
+    &.mobile-hidden {
+      animation: slideOutLeft $transition-duration-base $transition-timing-ease;
+    }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+// Angular Material tooltip custom styling
+.sidebar-tooltip {
+  background-color: $color-gray-900 !important;
+  color: $color-white !important;
+  font-size: $font-size-xs !important;
+  padding: $spacing-2 $spacing-3 !important;
+  border-radius: $border-radius-md !important;
+  box-shadow: $shadow-lg !important;
+  letter-spacing: $letter-spacing-normal;
+}

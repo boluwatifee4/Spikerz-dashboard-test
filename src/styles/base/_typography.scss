@@ -10,9 +10,8 @@
 // FONT FACE DECLARATIONS
 // ============================================================================
 
-// Inter font family (primary)
-// Note: In production, these would be loaded via Google Fonts or local files
-// For now, we rely on system fonts as fallback
+// Public Sans font family (primary)
+// Loaded via Google Fonts in index.html with optical sizing support
 
 // ============================================================================
 // BASE TYPOGRAPHY
@@ -25,6 +24,7 @@ body {
   line-height: $line-height-normal;
   color: $text-primary;
   letter-spacing: $letter-spacing-normal;
+  font-optical-sizing: auto;
 }
 
 // ============================================================================

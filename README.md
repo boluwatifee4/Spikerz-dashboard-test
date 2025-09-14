@@ -1,59 +1,69 @@
-# SpikerzDashboard
+## Spikerz Dashboard
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+Modern Angular 19 dashboard implementing a collapsible navigation sidebar, responsive layout, design‑token driven SCSS architecture, and accessible icon tooltips (Angular Material).
 
-## Development server
+### Tech Stack
+| Layer | Choice |
+|-------|--------|
+| Framework | Angular 19 (standalone APIs) |
+| Styling | SCSS design tokens (abstracts/base/layout/components) |
+| UI Lib | Angular Material (tooltips only currently) |
+| Charts | ngx-charts + d3 |
+| Fonts | Public Sans (Google Fonts) |
 
-To start a local development server, run:
-
+### Quick Start
 ```bash
-ng serve
+npm install
+npm start   # serves at http://localhost:4200/
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Build
 ```bash
-ng generate component component-name
+npm run build
 ```
+Artifacts output to `dist/`.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Inline Templates Rationale
+`LayoutComponent` and `SidebarComponent` intentionally use inline templates instead of separate `.html` files because:
+1. The markup is relatively small and unlikely to grow drastically.
+2. Rapid iteration during early layout + styling passes (fewer file hops, better locality with logic & state signals).
+3. Easier to reason about structural changes while refining SCSS architecture.
 
-```bash
-ng generate --help
+When to externalize later:
+- Template exceeds ~150 lines or becomes hard to scan.
+- Designers / other contributors need direct markup access.
+- You introduce complex structural directives or lots of conditional branches.
+
+How to externalize (example):
+1. Create `sidebar.component.html`.
+2. Move template content from the decorator string into the file.
+3. Replace `template:` with `templateUrl:` in the component metadata.
+4. Repeat for `layout.component.ts` if needed.
+
+### Architecture Overview
 ```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
+src/styles/
+	abstracts/ (variables, mixins, functions)
+	base/      (reset, typography)
+	layout/    (grid, containers)
+	components/(cards, buttons, etc.)
+	vendors/   (overrides)
 ```
+Key tokens in `abstracts/_variables.scss` drive spacing, colors, typography, and sidebar dimensions (`$sidebar-width`, `$sidebar-width-collapsed`).
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+### Sidebar Behavior
+- Collapsible: full width → icon rail using `$sidebar-width-collapsed`.
+- Toggle button sits on the outer border (overflow visible).
+- Tooltips provided by Angular Material and only activated in collapsed mode.
 
-## Running unit tests
+### Accessibility Notes
+- All interactive elements have `aria-label`s.
+- Tooltips enhance, not replace, visible text (hidden only when collapsed).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### Next Enhancements (Potential)
+- Persist sidebar state (localStorage) per user.
+- Add routing + active link synchronization.
+- Introduce lazy‑loaded feature modules.
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+### License
+Internal / TBD.

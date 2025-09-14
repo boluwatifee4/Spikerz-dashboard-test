@@ -224,7 +224,7 @@
 }
 
 .card-selectable {
-  @include card-interactive;
+  @extend .card-interactive;
   border: $border-width-2 $border-style-solid transparent;
 
   &.card-selected {
