@@ -1,5 +1,12 @@
 ## Spikerz Dashboard
 
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/300ff03d-9d72-4747-8e04-d9ab7f5cf3f5" />
+
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/bd52a279-d335-480d-8c4c-306472d4d353" />
+
+<img width="1440" height="900" alt="image" src="https://github.com/user-attachments/assets/97f3cb26-6430-403c-b299-d5ac97258001" />
+
+
 Modern Angular 19 dashboard implementing a collapsible navigation sidebar, responsive layout, design‑token driven SCSS architecture, and accessible icon tooltips (Angular Material).
 
 ### Recent Updates
