@@ -159,6 +159,48 @@ $dashboard-panel-padding-y: 1.875rem; // 30px
     margin-bottom: $spacing-6; // space before divider
   }
 
+  // Custom graph node styling
+  .entity-flow-graph {
+    width: 100%;
+    height: 18rem; // provisional height matching design space
+  }
+  .flow-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: $font-size-xs;
+    text-align: center;
+    cursor: pointer;
+    .circle {
+      width: 4.25rem;
+      height: 4.25rem;
+      border-radius: 50%;
+      background: rgba($color-primary-blue, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 70%;
+        height: 70%;
+        object-fit: contain;
+      }
+      position: relative;
+    }
+    &.is-critical .circle {
+      background: rgba($color-primary-red, 0.12);
+    }
+    .flow-label {
+      margin-top: $spacing-3;
+      font-weight: $font-weight-medium;
+      color: $text-primary;
+    }
+    .flow-ip {
+      margin-top: $spacing-1;
+      font-size: 0.625rem;
+      color: $text-secondary;
+    }
+  }
+
   .flow-chart-placeholder {
     min-height: 12rem;
     @include flex-center;
