@@ -1,0 +1,59 @@
+<div class="dashboard-layout">
+	<section class="panel panel-left entity-details">
+		<h2 class="section-heading">Description</h2>
+		<p class="body-text">Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Non Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.</p>
+
+		<h2 class="section-heading mt-section">Extra</h2>
+		<p class="body-text">Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar accumsan sed id. Duis a aliquam eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.</p>
+
+		<hr class="divider" />
+
+		<dl class="meta-grid">
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>10/19/2017</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>Ut</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>Eros</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd class="status success">
+					<span class="status-icon" aria-hidden="true">✔</span>
+					<span class="status-text">Yes</span>
+				</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>Sit</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>Lorem Ipsum Dolor</dd>
+			</div>
+			<div class="meta-row">
+				<dt>Lorem Ipsum Dolor</dt>
+				<dd>Lorem Ipsum Dolor</dd>
+			</div>
+		</dl>
+
+		<hr class="divider" />
+
+		<h3 class="section-heading">Lorem Ipsum Dolor Sit</h3>
+		<div class="server-accordion-list">
+			@for (item of serverItems(); track item; let i = $index) {
+				<app-server-accordion-item [item]="item"></app-server-accordion-item>
+			}
+		</div>
+	</section>
+	<section class="panel panel-right">
+		<!-- Right panel content placeholder -->
+		<h2 class="panel-title">Right Panel</h2>
+		<p class="panel-placeholder">Content goes here...</p>
+	</section>
+</div>

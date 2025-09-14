@@ -20,7 +20,7 @@
   z-index: 1000;
   overflow: visible; // allow toggle button to protrude
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  padding: $spacing-6 $spacing-4;
+  padding: $spacing-4 $spacing-4;
 
   &.collapsed {
     width: $sidebar-width-collapsed;
@@ -83,7 +83,6 @@
   flex: 1;
   gap: $spacing-2;
   overflow-y: auto;
-  margin-top: $spacing-8; // Add space for toggle button
 
   .sidebar.collapsed & {
     padding: 0;
@@ -194,7 +193,6 @@
   padding: $spacing-4;
   padding-left: 0;
   margin-top: auto;
-  border-top: 1px solid $color-gray-200;
   background-color: $bg-primary;
 }
 

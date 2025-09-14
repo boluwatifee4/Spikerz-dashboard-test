@@ -1,0 +1,126 @@
+@import "../../../../styles/abstracts/variables";
+@import "../../../../styles/abstracts/mixins";
+
+.server-accordion {
+  background: $color-white;
+  border: 1px solid $border-light;
+  border-radius: $border-radius-xl;
+  padding: $spacing-3;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3;
+  box-shadow: 0 1px 3px rgba($color-black, 0.05);
+  transition: $transition-all;
+  margin-bottom: $spacing-5;
+
+  & + .server-accordion {
+    margin-top: $spacing-5;
+  }
+
+  // &.open state retained for potential future styling (currently no visual change)
+}
+
+.item-heading {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $text-primary;
+  margin: 0;
+}
+
+.trigger {
+  @include flex-start;
+  gap: $spacing-5;
+  width: 100%;
+  background: $color-gray-50;
+  border: none;
+  padding: $spacing-3;
+  text-align: left;
+  cursor: pointer;
+  position: relative;
+  font: inherit;
+  border-radius: $border-radius-lg;
+
+  &:focus {
+    outline: 2px solid $color-primary-blue;
+    outline-offset: 2px;
+  }
+}
+
+.icon-wrapper {
+  background: #d7eaff;
+  width: 3.3125rem; // ~53px / 16
+  height: 3.3125rem;
+  min-width: 3.3125rem;
+  border-radius: 50%;
+  @include flex-center;
+}
+
+.icon {
+  width: 3.3075rem;
+  height: 3.3075rem;
+  object-fit: contain;
+}
+
+.content-cluster {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1px 1fr;
+  align-items: center;
+  min-height: 3.5rem;
+  column-gap: $spacing-6; // ensure divider spacing on both sides
+}
+
+.cluster-main {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+.cluster-title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $text-primary;
+}
+.cluster-sub {
+  font-size: $font-size-xs;
+  color: $text-secondary;
+}
+.cluster-text {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: $text-primary;
+}
+
+.divider-vertical {
+  width: 1.2px;
+  align-self: stretch;
+  background: $color-gray-400;
+  // spacing now handled by column-gap in grid
+  margin: 0;
+}
+
+// Removed chevron styles as design has no indicator
+
+.body {
+  padding: 0;
+}
+.body-text {
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  color: $text-secondary;
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  .content-cluster {
+    grid-template-columns: auto 1px;
+    grid-template-rows: auto auto;
+  }
+  .cluster-text {
+    grid-column: 1 / -1;
+    padding-left: 0;
+    padding-top: $spacing-3;
+  }
+  .divider-vertical {
+    display: none;
+  }
+}

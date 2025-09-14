@@ -1,0 +1,141 @@
+@import "../../../styles/abstracts/variables";
+@import "../../../styles/abstracts/mixins";
+
+// Two-panel dashboard layout (no visual design embellishments beyond structure)
+
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr); // 35% / 65%
+  gap: $spacing-2 + $spacing-1; // 10px equivalent (8 + 4 = 12, adjust) -> create custom token below
+  gap: 0.625rem; // 10px explicit because design calls for exact 10px
+  align-items: start;
+  width: 100%;
+}
+
+// Optional: tokenization for exact spec (kept local to avoid polluting global scale)
+$dashboard-gap: 0.625rem; // 10px
+$dashboard-panel-radius: 0.9375rem; // 15px
+$dashboard-panel-padding-x: 1.25rem; // 20px
+$dashboard-panel-padding-y: 1.875rem; // 30px
+
+.panel {
+  background: $bg-primary;
+  border-radius: $dashboard-panel-radius;
+  padding: $dashboard-panel-padding-y $dashboard-panel-padding-x;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  box-shadow: none; // keep flat per request (no design embellishment yet)
+}
+
+.panel-left {
+  width: 100%; // grid controls width
+}
+
+.panel-right {
+  width: 100%;
+}
+
+// Basic placeholders (will be replaced later)
+.panel-title {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  margin: 0 0 $spacing-4;
+}
+
+.panel-placeholder {
+  font-size: $font-size-sm;
+  color: $text-muted;
+  margin: 0;
+}
+
+// ============================================================================
+// LEFT PANEL (Entity Details) STYLES
+// ============================================================================
+
+.entity-details {
+  .section-heading {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+    color: $color-primary-green;
+    margin: 0 0 $spacing-4;
+  }
+
+  .mt-section {
+    margin-top: $spacing-5;
+  }
+
+  .body-text {
+    font-size: $font-size-xs;
+    line-height: $line-height-relaxed;
+    color: $text-secondary;
+    margin: 0 0 $spacing-5;
+  }
+
+  .divider {
+    border: 0;
+    height: 1px;
+    background: $border-light;
+    margin: $spacing-6 0 $spacing-6;
+  }
+
+  .meta-grid {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin: 0;
+  }
+
+  .meta-row {
+    display: grid;
+    grid-template-columns: auto 1fr; // label size to content, value takes rest
+    column-gap: $spacing-8;
+    row-gap: $spacing-1;
+    align-items: start;
+    padding: 0;
+  }
+
+  dt,
+  dd {
+    margin: 0;
+  }
+
+  dt {
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-sm;
+    color: $text-primary;
+  }
+
+  dd {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+  }
+
+  .status-icon {
+    font-size: 0.875em;
+    line-height: 1;
+  }
+
+  .status.success {
+    color: $color-primary-green;
+    font-weight: $font-weight-medium;
+  }
+
+  .sub-heading {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-primary-green;
+    margin: 0;
+  }
+}
+
+// Responsive: stack on smaller widths
+@media (max-width: 960px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+    gap: $dashboard-gap;
+  }
+}

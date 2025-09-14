@@ -7,10 +7,13 @@
 @import "../../styles/abstracts/mixins";
 
 .layout-container {
-  @include flex-start;
+  display: flex;
+  align-items: flex-start; // allow independent vertical growth
+  justify-content: flex-start;
   min-height: 100vh;
   background-color: $bg-secondary;
   position: relative;
+  width: 100%;
 }
 
 .main-content {
@@ -19,12 +22,16 @@
   min-height: 100vh;
   transition: margin-left $transition-duration-base $transition-timing-ease;
   background-color: $bg-secondary;
+  box-sizing: border-box; // ensure internal elements calculate width correctly
+  width: 100%;
+  // Width & padding handled by inner .content-wrapper for consistent spacing
 
   &.sidebar-collapsed {
     margin-left: $sidebar-width-collapsed; // Updated to use the variable
   }
 
-  @include responsive(md) {
+  // On small screens we don't reserve horizontal space; sidebar will overlay
+  @include responsive-down(md) {
     margin-left: 0;
 
     &.sidebar-collapsed {
@@ -34,7 +41,7 @@
 }
 
 .content-wrapper {
-  padding: $spacing-6;
+  padding: $spacing-7; // moved from main-content
   max-width: 100%;
   width: 100%;
 
@@ -70,8 +77,8 @@
   }
 }
 
-// Responsive adjustments
-@include responsive(md) {
+// Responsive adjustments (stack only on small screens)
+@include responsive-down(md) {
   .layout-container {
     flex-direction: column;
   }

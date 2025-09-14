@@ -318,6 +318,42 @@
   }
 }
 
+// Max-width (down) responsive helper – applies styles BELOW the breakpoint
+// Usage: @include responsive-down(md) { ... }
+// We subtract a small fraction (0.02rem) to avoid overlap with the min-width query of the next range.
+@mixin responsive-down($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: calc(#{$breakpoint-xs} - 0.02rem)) {
+      @content;
+    }
+  }
+  @if $breakpoint == sm {
+    @media (max-width: calc(#{$breakpoint-sm} - 0.02rem)) {
+      @content;
+    }
+  }
+  @if $breakpoint == md {
+    @media (max-width: calc(#{$breakpoint-md} - 0.02rem)) {
+      @content;
+    }
+  }
+  @if $breakpoint == lg {
+    @media (max-width: calc(#{$breakpoint-lg} - 0.02rem)) {
+      @content;
+    }
+  }
+  @if $breakpoint == xl {
+    @media (max-width: calc(#{$breakpoint-xl} - 0.02rem)) {
+      @content;
+    }
+  }
+  @if $breakpoint == 2xl {
+    @media (max-width: calc(#{$breakpoint-2xl} - 0.02rem)) {
+      @content;
+    }
+  }
+}
+
 // Hide elements accessibly
 @mixin visually-hidden {
   position: absolute !important;

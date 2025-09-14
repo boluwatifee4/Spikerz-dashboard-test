@@ -1,0 +1,21 @@
+<article class="server-accordion" [class.open]="open()">
+  <h4 class="item-heading">{{ item.title }}</h4>
+  <button type="button" class="trigger" (click)="toggle()" [attr.aria-expanded]="open()">
+    <span class="icon-wrapper">
+      <img class="icon" [src]="item.iconPath" [alt]="item.type + ' icon'" loading="lazy" />
+    </span>
+    <span class="content-cluster">
+      <span class="cluster-main">
+        <span class="cluster-title">{{ item.type }}</span>
+        <span class="cluster-sub">{{ item.type }}</span>
+      </span>
+      <span class="divider-vertical" aria-hidden="true"></span>
+      <span class="cluster-text">{{ item.subtitle }}</span>
+    </span>
+  </button>
+  <div class="body-wrapper" *ngIf="open()" @expandCollapse>
+    <div class="body">
+      <p class="body-text">{{ item.description }}</p>
+    </div>
+  </div>
+</article>
