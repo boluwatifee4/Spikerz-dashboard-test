@@ -1,59 +1,144 @@
 <div class="dashboard-layout">
-	<section class="panel panel-left entity-details">
-		<h2 class="section-heading">Description</h2>
-		<p class="body-text">Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Non Nulla Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.</p>
+  <section class="panel panel-left entity-details">
+    <h2 class="section-heading">Description</h2>
+    <p class="body-text">Lorem Ipsum Dolor Sit Amet Consectetur. Aenean Sodales Pellentesque Gravida Nibh Et Magna
+      Faucibus. Dui Commodo Ut Metus Amet Egestas Habitant Viverra. Quisque Fusce Senectus Facilisis Non Diam Non Nulla
+      Sem Pellentesque. Sit In Vel Sed Cursus Metus Sit Fringilla Vestibulum.</p>
 
-		<h2 class="section-heading mt-section">Extra</h2>
-		<p class="body-text">Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar accumsan sed id. Duis a aliquam eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.</p>
+    <h2 class="section-heading mt-section">Extra</h2>
+    <p class="body-text">Lorem ipsum dolor sit amet consectetur. Tempus a id adipiscing fames egestas tellus dis pretium
+      tempus. Justo nisl nisl lorem lectus id ornare. Rhoncus in egestas in amet porttitor pellentesque sit. Amet
+      gravida integer velit felis. Eu consectetur interdum auctor sed aliquam. Eu pulvinar accumsan sed id. Duis a
+      aliquam eu quisque commodo lectus. Lectus ipsum velit purus viverra vulputate viverra in nunc nulla. Euismod
+      rhoncus mauris urna orci gravida sagittis netus. Amet mus in vel etiam. Interdum habitant congue massa in etiam
+      sit. Commodo nibh viverra lobortis augue lorem quam lorem suspendisse.</p>
 
-		<hr class="divider" />
+    <hr class="divider" />
 
-		<dl class="meta-grid">
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>10/19/2017</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>Ut</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>Eros</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd class="status success">
-					<span class="status-icon" aria-hidden="true">✔</span>
-					<span class="status-text">Yes</span>
-				</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>Sit</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>Lorem Ipsum Dolor</dd>
-			</div>
-			<div class="meta-row">
-				<dt>Lorem Ipsum Dolor</dt>
-				<dd>Lorem Ipsum Dolor</dd>
-			</div>
-		</dl>
+    <dl class="meta-grid">
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>10/19/2017</dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>Ut</dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>Eros</dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd class="status success">
+          <span class="status-icon" aria-hidden="true">✔</span>
+          <span class="status-text">Yes</span>
+        </dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>Sit</dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>Lorem Ipsum Dolor</dd>
+      </div>
+      <div class="meta-row">
+        <dt>Lorem Ipsum Dolor</dt>
+        <dd>Lorem Ipsum Dolor</dd>
+      </div>
+    </dl>
 
-		<hr class="divider" />
+    <hr class="divider" />
 
-		<h3 class="section-heading">Lorem Ipsum Dolor Sit</h3>
-		<div class="server-accordion-list">
-			@for (item of serverItems(); track item; let i = $index) {
-				<app-server-accordion-item [item]="item"></app-server-accordion-item>
-			}
-		</div>
-	</section>
-	<section class="panel panel-right">
-		<!-- Right panel content placeholder -->
-		<h2 class="panel-title">Right Panel</h2>
-		<p class="panel-placeholder">Content goes here...</p>
-	</section>
+    <h3 class="section-heading">Lorem Ipsum Dolor Sit</h3>
+    <div class="server-accordion-list">
+      @for (item of serverItems(); track item; let i = $index) {
+      <app-server-accordion-item [item]="item"></app-server-accordion-item>
+      }
+    </div>
+  </section>
+  <section class="panel panel-right">
+    <!-- Flow chart + legend unified container -->
+         <h2 class="section-heading secondary">Lorem Lorem Lorem</h2>
+    <div class="card flow-chart-card" role="group" aria-label="Entity flow & protection legend">
+      <!-- Flow chart placeholder (to be implemented later) -->
+      <div class="flow-chart-placeholder" aria-hidden="true">Flow Chart (pending)</div>
+
+      <hr class="flow-legend-divider" />
+
+      <!-- Status legend row (shared background) -->
+      <ul class="status-legend" aria-label="Protection status legend">
+        <li class="legend-item critical">
+          <span class="legend-icon"><img src="assets/icons/status/unprotected.svg" alt="Unprotected" /></span>
+          <span class="legend-label">Lorem</span>
+        </li>
+        <li class="legend-item warning">
+          <span class="legend-icon"><img src="assets/icons/status/almost-protected.svg" alt="Almost Protected" /></span>
+          <span class="legend-label">Lorem</span>
+        </li>
+        <li class="legend-item success">
+          <span class="legend-icon"><img src="assets/icons/status/protected.svg" alt="Protected" /></span>
+          <span class="legend-label">Lorem</span>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="section-heading secondary">Lorem Ipsum Dolor Sit</h2>
+
+    <div class="risk-panels">
+      <!-- Assets table card -->
+      <div class="card assets-card" role="group" aria-label="Assets contextual risk list">
+        <table class="assets-table">
+          <thead>
+            <tr>
+              <th>Asset</th>
+              <th>Contextual Risk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="asset-cell">
+                <span class="asset-icon-wrapper"><img src="assets/icons/status/stack-bars.svg"
+                    alt="Server icon" /></span>
+                <span class="asset-text">
+                  <span class="asset-name">Lorempipsumdolorsit</span>
+                  <span class="asset-ip">192.168.1.1</span>
+                </span>
+              </td>
+              <td><span class="risk-badge critical">Critical</span></td>
+            </tr>
+            <tr>
+              <td class="asset-cell">
+                <span class="asset-icon-wrapper"><img src="assets/icons/status/stack-bars.svg"
+                    alt="Server icon" /></span>
+                <span class="asset-text">
+                  <span class="asset-name">Lorempipsumdolorsit002</span>
+                  <span class="asset-ip">192.168.1.2</span>
+                </span>
+              </td>
+              <td><span class="risk-badge critical">Critical</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="table-footer">&lt; <span>Showing 1-2 of 2</span> &gt;</div>
+      </div>
+
+      <!-- Risk summary ring card -->
+      <div class="card risk-summary" role="group" aria-label="Contextual risk summary">
+        <h3 class="risk-title">Contextual Risk</h3>
+        <div>
+          <ul class="risk-list">
+            <li><span class="dot critical"></span> <strong>2</strong> Critical</li>
+            <li><span class="dot high"></span> <strong>0</strong> High</li>
+            <li><span class="dot medium"></span> <strong>0</strong> Medium</li>
+            <li><span class="dot low"></span> <strong>0</strong> Low</li>
+          </ul>
+        </div>
+        <div class="risk-ring" aria-hidden="true">
+          <span class="ring-value">2</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
