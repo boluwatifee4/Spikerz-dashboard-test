@@ -2,6 +2,16 @@
 
 Modern Angular 19 dashboard implementing a collapsible navigation sidebar, responsive layout, design‑token driven SCSS architecture, and accessible icon tooltips (Angular Material).
 
+### Recent Updates
+
+- Dashboard two‑panel container renamed to `.entity-dashboard` (avoids collision with global `.dashboard-layout`).
+- Graph visualization: `ngx-graph` was initially planned for the flow chart, but runtime/build errors (during integration under time constraints) blocked usage, so a lightweight custom placeholder structure + status legend was implemented temporarily. Replacement with `ngx-graph` (or another graph lib) is a queued enhancement.
+- Mobile: panels stack (single column) < `$breakpoint-md`; main content now shifts by collapsed sidebar width when sidebar opened on small screens.
+- Sidebar overlay logic adds `.sidebar-open` + `data-mobile="true"` to `<main>` for mobile margin control.
+- Adopted `100dvh` for layout + scrolling containment to improve iOS viewport handling.
+- Component style budget raised: `anyComponentStyle` warning `6kB`, error `10kB` (see `angular.json`).
+- Dashboard SCSS trimmed (merged media queries, reduced duplication); move further shared patterns to global partials if growth resumes.
+
 ### Tech Stack
 
 | Layer     | Choice                                                |
@@ -66,6 +76,13 @@ Key tokens in `abstracts/_variables.scss` drive spacing, colors, typography, and
 - Collapsible: full width → icon rail using `$sidebar-width-collapsed`.
 - Toggle button sits on the outer border (overflow visible).
 - Tooltips provided by Angular Material and only activated in collapsed mode.
+- Mobile: Sidebar overlays content; when expanded a left offset equal to `$sidebar-width-collapsed` is applied to `.main-content.sidebar-open` for visual breathing room.
+
+### Dashboard Layout
+
+- Two panels (`.panel-left`, `.panel-right`) inside `.entity-dashboard` grid.
+- Mobile-first: default 1fr; ≥ `md` switches to 35% / 65% columns; wider breakpoints refine ratios.
+- Utility classes: `.dashboard-hide-mobile`, `.dashboard-show-desktop` for conditional rendering.
 
 ### Accessibility Notes
 
@@ -77,6 +94,19 @@ Key tokens in `abstracts/_variables.scss` drive spacing, colors, typography, and
 - Persist sidebar state (localStorage) per user.
 - Add routing + active link synchronization.
 - Introduce lazy‑loaded feature modules.
+- Consolidate shared dashboard card / legend / table styles into a single global partial to keep per-component budgets healthy.
+- Optional CSS container queries for more granular panel stacking logic.
+
+### Style Budgets & Optimization
+
+`angular.json` production budgets include a component style limit now set to 6kB (warn) / 10kB (error). Keep individual component SCSS lean by:
+
+1. Moving repeated card & table patterns into `styles/components/` partials imported once.
+2. Pruning rarely used breakpoints (e.g. ultra‑narrow tweaks) if not required.
+3. Preferring design tokens & utility abstractions instead of repeating long property blocks.
+4. Avoiding excessive comments in component SCSS (document globally instead).
+
+To adjust budgets further, edit the `anyComponentStyle` entry under `projects.spikerz-dashboard.architect.build.configurations.production.budgets`.
 
 ### License
 

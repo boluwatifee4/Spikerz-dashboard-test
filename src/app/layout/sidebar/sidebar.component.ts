@@ -207,7 +207,7 @@ export class SidebarComponent {
       this.updateActiveItem(item.id);
     }
 
-    console.log(`Navigation clicked: ${item.label}`);
+    // console.log(`Navigation clicked: ${item.label}`);
   }
 
   /**
@@ -226,7 +226,7 @@ export class SidebarComponent {
    * Handle sign out
    */
   onSignOut(): void {
-    console.log('Sign out clicked');
+    // console.log('Sign out clicked');
     // Implement sign out logic
   }
 
@@ -234,7 +234,7 @@ export class SidebarComponent {
    * Handle user avatar click in collapsed mode
    */
   onUserClick(): void {
-    console.log('User avatar clicked');
+    // console.log('User avatar clicked');
     // Could show user menu or expand sidebar
   }
 
