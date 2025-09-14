@@ -33,7 +33,7 @@
   scrollbar-gutter: stable both-edges;
 
   &.sidebar-collapsed {
-    margin-left: $sidebar-width-collapsed; // Updated to use the variable
+    margin-left: $sidebar-width-collapsed !important; // Updated to use the variable
   }
 
   // On small screens we don't reserve horizontal space; sidebar will overlay
