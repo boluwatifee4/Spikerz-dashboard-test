@@ -512,18 +512,18 @@ body {
 
 // Webkit browsers (Chrome, Safari, Edge)
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: $spacing-1; // Changed from 6px to token
+  height: $spacing-1; // Changed from 6px to token
 }
 
 ::-webkit-scrollbar-track {
   background: $bg-secondary;
-  border-radius: 3px;
+  border-radius: calc($spacing-1 / 2); // Changed from 3px to token
 }
 
 ::-webkit-scrollbar-thumb {
   background: rgba($color-primary-green, 0.3);
-  border-radius: 3px;
+  border-radius: calc($spacing-1 / 2); // Changed from 3px to token
   transition: all 0.2s ease-in-out;
 }
 
@@ -549,13 +549,13 @@ body {
 // Custom scrollbar for specific components
 .scrollbar-thin {
   &::-webkit-scrollbar {
-    width: 4px;
-    height: 4px;
+    width: calc($spacing-1 / 1.5); // Changed from 4px to token
+    height: calc($spacing-1 / 1.5); // Changed from 4px to token
   }
 
   &::-webkit-scrollbar-thumb {
     background: rgba($color-primary-blue, 0.4);
-    border-radius: 2px;
+    border-radius: calc($spacing-1 / 4); // Changed from 2px to token
     transition: all 0.2s ease-in-out;
   }
 

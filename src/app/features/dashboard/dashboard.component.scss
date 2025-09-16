@@ -4,25 +4,25 @@
 .entity-dashboard {
   display: grid;
   width: 100%;
-  gap: 0.625rem;
+  gap: $spacing-2; // Changed from 0.625rem to token
   align-items: start;
   grid-template-columns: 1fr;
-  padding: 1rem;
+  padding: $spacing-4; // Changed from 1rem to token
   height: 100vh;
   overflow: hidden;
 }
 @media (min-width: $breakpoint-lg) {
   .entity-dashboard {
-    grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
+    grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr); // Changed from 0.35/0.65 to 0.3/0.7 (reduced left by ~14%)
     padding: 0;
     height: 100vh;
     overflow: hidden;
   }
 }
 
-$dashboard-panel-radius: 0.9375rem;
-$dashboard-panel-padding-x: 1.25rem;
-$dashboard-panel-padding-y: 1.875rem;
+$dashboard-panel-radius: $border-radius-xl; // Changed from 0.9375rem to token
+$dashboard-panel-padding-x: $spacing-5; // Changed from 1.25rem to token
+$dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
 
 .panel {
   background: $bg-primary;
@@ -170,7 +170,7 @@ $dashboard-panel-padding-y: 1.875rem;
   }
   .entity-details .section-heading,
   .panel-right .section-heading.secondary {
-    font-size: 1.1rem;
+    font-size: $font-size-lg; // Changed from 1.1rem to token
   }
   .panel-right .flow-chart-card,
   .panel-right .card {
@@ -187,8 +187,8 @@ $dashboard-panel-padding-y: 1.875rem;
   }
   .panel-right .risk-ring {
     margin: 0 auto;
-    width: 7rem;
-    height: 7rem;
+    width: $spacing-14; // Changed from 7rem to token
+    height: $spacing-14; // Changed from 7rem to token
   }
   .entity-details .meta-row {
     grid-template-columns: 1fr;
@@ -207,7 +207,7 @@ $dashboard-panel-padding-y: 1.875rem;
   }
   .entity-details .section-heading,
   .panel-right .section-heading.secondary {
-    font-size: 1rem;
+    font-size: $font-size-base; // Changed from 1rem to token
     margin-bottom: $spacing-3;
   }
   .panel-right .flow-chart-card,
@@ -215,12 +215,12 @@ $dashboard-panel-padding-y: 1.875rem;
     padding: $spacing-3;
   }
   .panel-right .legend-icon {
-    width: 2rem;
-    height: 2rem;
+    width: $spacing-8; // Changed from 2rem to token
+    height: $spacing-8; // Changed from 2rem to token
   }
   .panel-right .legend-item img {
-    width: 1rem;
-    height: 1rem;
+    width: $spacing-4; // Changed from 1rem to token
+    height: $spacing-4; // Changed from 1rem to token
   }
   .panel-right .assets-table thead th,
   .panel-right .assets-table tbody td {
@@ -233,16 +233,16 @@ $dashboard-panel-padding-y: 1.875rem;
     gap: $spacing-2;
   }
   .panel-right .asset-icon-wrapper {
-    width: 2rem;
-    height: 2rem;
+    width: $spacing-8; // Changed from 2rem to token
+    height: $spacing-8; // Changed from 2rem to token
   }
   .panel-right .risk-ring {
-    width: 5.5rem;
-    height: 5.5rem;
+    width: $spacing-12; // Changed from 5.5rem to token
+    height: $spacing-12; // Changed from 5.5rem to token
     border-width: 0.3rem;
   }
   .panel-right .ring-value {
-    font-size: 1.2rem;
+    font-size: $font-size-xl; // Changed from 1.2rem to token
   }
   .entity-details .body-text,
   .panel-right .risk-list {
@@ -255,7 +255,7 @@ $dashboard-panel-padding-y: 1.875rem;
 // Root adjustments for large screens
 @media (min-width: $breakpoint-xl) {
   .entity-dashboard {
-    grid-template-columns: minmax(0, 0.38fr) minmax(0, 0.62fr);
+    grid-template-columns: minmax(0, 0.32fr) minmax(0, 0.68fr); // Adjusted for consistency
   }
 }
 
@@ -310,12 +310,12 @@ $dashboard-panel-padding-y: 1.875rem;
 // Small phones
 @media (max-width: 380px) {
   .panel-right .legend-icon {
-    width: 2rem;
-    height: 2rem;
+    width: $spacing-8; // Changed from 2rem to token
+    height: $spacing-8; // Changed from 2rem to token
   }
   .panel-right .legend-item img {
-    width: 1rem;
-    height: 1rem;
+    width: $spacing-4; // Changed from 1rem to token
+    height: $spacing-4; // Changed from 1rem to token
   }
   .panel-right .ring-value {
     font-size: 1.4rem;
@@ -418,7 +418,7 @@ $dashboard-panel-padding-y: 1.875rem;
     }
     .flow-ip {
       margin-top: $spacing-1;
-      font-size: 0.625rem;
+      font-size: $font-size-xs; // Changed from 0.625rem to token
       color: $text-secondary;
     }
   }
