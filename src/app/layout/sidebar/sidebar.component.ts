@@ -43,6 +43,20 @@ interface NavigationItem {
         </svg>
       </button>
 
+      <!-- Brand / Logo -->
+      <a class="sidebar-brand" [routerLink]="'/dashboard'" aria-label="Home">
+        <img
+          *ngIf="!isCollapsed"
+          src="/logo.png"
+          alt="Logo"
+          class="brand-logo brand-logo-full" />
+        <img
+          *ngIf="isCollapsed"
+          src="/logo.png"
+          alt="Logo"
+          class="brand-logo brand-logo-compact" />
+      </a>
+
       <!-- Navigation -->
       <nav class="sidebar-nav">
         <!-- Main Navigation Items -->
