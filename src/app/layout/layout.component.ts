@@ -8,9 +8,44 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   imports: [CommonModule, SidebarComponent],
   template: `
     <div class="layout-container">
+      <!-- Mobile Header (visible below 1024px) -->
+      <header class="mobile-header" *ngIf="isTabletOrMobile()">
+        <div class="header-content">
+          <!-- Hamburger Menu Button -->
+          <button
+            class="hamburger-btn"
+            (click)="toggleSidebar()"
+            [class.active]="!isSidebarCollapsed()"
+            aria-label="Toggle sidebar">
+            <svg
+              *ngIf="isSidebarCollapsed(); else closeIcon"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none">
+              <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <ng-template #closeIcon>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </ng-template>
+          </button>
+
+          <!-- Logo -->
+          <a class="header-logo" routerLink="/dashboard">
+            <img src="/logo.png" alt="Logo" class="logo-image" />
+          </a>
+
+          <!-- Spacer for centering -->
+          <div class="header-spacer"></div>
+        </div>
+      </header>
+
       <!-- Sidebar -->
       <app-sidebar
         [isCollapsed]="isSidebarCollapsed()"
+        [isHidden]="isTabletOrMobile() && isSidebarCollapsed()"
         (toggleSidebar)="toggleSidebar()"
         (sidebarStateChange)="onSidebarStateChange($event)">
       </app-sidebar>
@@ -18,10 +53,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
       <!-- Main Content Area -->
       <main
         class="main-content"
-        [attr.data-mobile]="isMobile() ? 'true' : 'false'"
+        [attr.data-mobile]="isTabletOrMobile() ? 'true' : 'false'"
         [class.sidebar-collapsed]="isSidebarCollapsed()"
-        [class.sidebar-open]="!isSidebarCollapsed() && isMobile()"
-        [class.mobile]="isMobile()">
+        [class.sidebar-open]="!isSidebarCollapsed() && isTabletOrMobile()"
+        [class.mobile]="isTabletOrMobile()"
+        [class.with-header]="isTabletOrMobile()">
         <div class="content-wrapper">
           <!-- Router outlet will go here for different pages -->
           <ng-content></ng-content>
@@ -31,9 +67,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
       <!-- Mobile Overlay -->
       <div
         class="mobile-overlay"
-        [class.active]="!isSidebarCollapsed()"
+        [class.active]="!isSidebarCollapsed() && isTabletOrMobile()"
         (click)="closeSidebar()"
-        *ngIf="isMobile">
+        *ngIf="isTabletOrMobile()">
       </div>
     </div>
   `,
@@ -42,7 +78,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 export class LayoutComponent {
   // Sidebar state management using Angular signals
   isSidebarCollapsed = signal(false);
-  isMobile = signal(window.innerWidth < 768);
+  isTabletOrMobile = signal(window.innerWidth < 1024);
 
   constructor() {
     // Listen for window resize to handle responsive behavior
@@ -57,10 +93,10 @@ export class LayoutComponent {
   }
 
   /**
-   * Close sidebar (mainly for mobile)
+   * Close sidebar (mainly for mobile/tablet)
    */
   closeSidebar(): void {
-    if (this.isMobile()) {
+    if (this.isTabletOrMobile()) {
       this.isSidebarCollapsed.set(true);
     }
   }
@@ -77,11 +113,11 @@ export class LayoutComponent {
    */
   private handleResize(): void {
     window.addEventListener('resize', () => {
-      const mobile = window.innerWidth < 768;
-      this.isMobile.set(mobile);
+      const tabletOrMobile = window.innerWidth < 1024;
+      this.isTabletOrMobile.set(tabletOrMobile);
 
-      // Auto-collapse on mobile, auto-expand on desktop
-      if (mobile) {
+      // Auto-collapse on tablet/mobile, auto-expand on desktop
+      if (tabletOrMobile) {
         this.isSidebarCollapsed.set(true);
       } else {
         this.isSidebarCollapsed.set(false);

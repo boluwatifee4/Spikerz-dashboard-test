@@ -16,6 +16,82 @@
   width: 100%;
 }
 
+// Mobile Header Styles
+.mobile-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background-color: $bg-primary;
+  border-bottom: 1px solid $border-light;
+  z-index: 1000;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 $spacing-4;
+    max-width: 100%;
+  }
+
+  .hamburger-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    border-radius: $border-radius-md;
+    color: $text-primary;
+    cursor: pointer;
+    transition: all $transition-duration-base $transition-timing-ease;
+
+    &:hover {
+      background-color: $bg-hover;
+    }
+
+    &:focus {
+      outline: 2px solid rgba($color-primary-blue, 0.3);
+      outline-offset: 2px;
+    }
+
+    &.active {
+      background-color: rgba($color-primary-green, 0.1);
+      color: $color-primary-green;
+
+      &:hover {
+        background-color: rgba($color-primary-green, 0.2);
+      }
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      transition: transform $transition-duration-base $transition-timing-ease;
+    }
+  }
+
+  .header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+
+    .logo-image {
+      height: 32px;
+      width: auto;
+    }
+  }
+
+  .header-spacer {
+    width: 40px; // Same width as hamburger button for centering
+  }
+}
+
 .main-content {
   flex: 1;
   margin-left: $sidebar-width;
@@ -34,6 +110,20 @@
 
   &.sidebar-collapsed {
     margin-left: $sidebar-width-collapsed !important; // Updated to use the variable
+  }
+
+  // On tablet and mobile screens (below 1024px), sidebar is completely hidden
+  @media (max-width: 1023px) {
+    margin-left: 0 !important; // sidebar is completely hidden
+    padding-top: 64px; // Account for fixed header
+
+    &.sidebar-collapsed {
+      margin-left: 0 !important; // Override collapsed state on mobile
+    }
+
+    &.with-header {
+      padding-top: 64px;
+    }
   }
 
   // On small screens we don't reserve horizontal space; sidebar will overlay
@@ -90,13 +180,14 @@
     visibility: visible;
   }
 
-  @include responsive(lg) {
+  // Hide overlay on desktop (1024px and above)
+  @media (min-width: 1024px) {
     display: none;
   }
 }
 
 // Responsive adjustments (stack only on small screens)
-@include responsive-down(md) {
+@media (max-width: 1023px) {
   .layout-container {
     flex-direction: column;
   }

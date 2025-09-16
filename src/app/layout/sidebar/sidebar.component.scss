@@ -22,26 +22,9 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   padding: $spacing-4 $spacing-4;
 
-  .sidebar-brand {
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    text-decoration: none;
-    margin-bottom: $spacing-6;
-    // margin-top: $spacing-10; // pushes below toggle
-    padding: 0 $spacing-2;
-    cursor: pointer;
-    .brand-logo {
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-    .brand-logo-full {
-      width: 40px;
-    }
-    .brand-logo-compact {
-      width: 42px;
-    }
+  // Completely hide sidebar on tablet and mobile (below 1024px)
+  &.hidden {
+    display: none;
   }
 
   &.collapsed {
@@ -64,12 +47,15 @@
     padding: $spacing-6 $spacing-2;
   }
 
-  @include responsive(md) {
+  // Tablet and mobile responsive behavior (below 1024px)
+  @media (max-width: 1023px) {
     z-index: 1050;
     box-shadow: $shadow-lg;
+    transform: translateX(-100%); // Start hidden off-screen
+    transition: transform $transition-duration-base $transition-timing-ease;
 
-    &:not(.mobile-hidden) {
-      transform: translateX(0);
+    &:not(.hidden) {
+      transform: translateX(0); // Show when not hidden
     }
   }
 }
@@ -353,7 +339,7 @@
 }
 
 // Mobile specific styles
-@include responsive(md) {
+@media (max-width: 1023px) {
   .sidebar {
     .nav-text {
       opacity: 1;
@@ -368,13 +354,13 @@
 }
 
 // Animation for mobile sidebar
-@media (max-width: 768px) {
+@media (max-width: 1023px) {
   .sidebar {
-    &:not(.mobile-hidden) {
+    &:not(.hidden) {
       animation: slideInLeft $transition-duration-base $transition-timing-ease;
     }
 
-    &.mobile-hidden {
+    &.hidden {
       animation: slideOutLeft $transition-duration-base $transition-timing-ease;
     }
   }

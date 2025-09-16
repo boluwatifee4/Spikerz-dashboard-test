@@ -19,6 +19,7 @@ interface NavigationItem {
     <aside
       class="sidebar"
       [class.collapsed]="isCollapsed"
+      [class.hidden]="isHidden"
       [class.mobile-hidden]="isMobileAndCollapsed()">
 
       <!-- Toggle Button -->
@@ -180,6 +181,7 @@ interface NavigationItem {
 })
 export class SidebarComponent {
   @Input() isCollapsed = false;
+  @Input() isHidden = false;
   @Output() toggleSidebar = new EventEmitter<void>();
   @Output() sidebarStateChange = new EventEmitter<boolean>();
 
@@ -199,7 +201,7 @@ export class SidebarComponent {
 
   // Computed property for mobile collapsed state
   isMobileAndCollapsed = computed(() => {
-    return window.innerWidth < 768 && this.isCollapsed;
+    return window.innerWidth < 1024 && this.isCollapsed;
   });
 
   /**

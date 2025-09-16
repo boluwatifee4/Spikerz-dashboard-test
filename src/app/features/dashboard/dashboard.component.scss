@@ -11,7 +11,7 @@
   height: 100vh;
   overflow: hidden;
 }
-@media (min-width: $breakpoint-md) {
+@media (min-width: $breakpoint-lg) {
   .entity-dashboard {
     grid-template-columns: minmax(0, 0.35fr) minmax(0, 0.65fr);
     padding: 0;
@@ -134,7 +134,7 @@ $dashboard-panel-padding-y: 1.875rem;
   }
 }
 
-@media (max-width: $breakpoint-md) {
+@media (max-width: $breakpoint-lg) {
   .entity-dashboard {
     grid-template-columns: 1fr;
     gap: $spacing-4;
@@ -152,7 +152,7 @@ $dashboard-panel-padding-y: 1.875rem;
 }
 
 // Tablet and small desktop adjustments
-@media (max-width: 1280px) and (min-width: $breakpoint-md) {
+@media (max-width: 1280px) and (min-width: $breakpoint-lg) {
   .panel-right .risk-panels {
     grid-template-columns: 1fr;
   }
@@ -259,8 +259,8 @@ $dashboard-panel-padding-y: 1.875rem;
   }
 }
 
-// Medium refinement between md and lg
-@media (max-width: $breakpoint-lg) and (min-width: $breakpoint-md) {
+// Medium refinement between lg and xl
+@media (max-width: $breakpoint-lg) and (min-width: $breakpoint-lg) {
   .entity-dashboard {
     grid-template-columns: 0.44fr 0.56fr;
   }
@@ -274,7 +274,7 @@ $dashboard-panel-padding-y: 1.875rem;
 }
 
 // Tablet portrait adjustments
-@media (max-width: $breakpoint-md) {
+@media (max-width: $breakpoint-lg) {
   .entity-dashboard {
     grid-template-columns: 1fr;
     max-width: 58rem;
