@@ -8,15 +8,15 @@
   align-items: start;
   grid-template-columns: 1fr;
   padding: $spacing-4; // Changed from 1rem to token
-  height: 100vh;
-  overflow: hidden;
+  height: auto; // Changed from 100vh to auto for mobile
+  overflow: visible; // Changed from hidden to visible for mobile
 }
 @media (min-width: $breakpoint-lg) {
   .entity-dashboard {
     grid-template-columns: minmax(0, 0.3fr) minmax(0, 0.7fr); // Changed from 0.35/0.65 to 0.3/0.7 (reduced left by ~14%)
     padding: 0;
-    height: 100vh;
-    overflow: hidden;
+    height: 100vh; // Keep viewport height for desktop
+    overflow: hidden; // Keep contained scrolling for desktop
   }
 }
 
@@ -37,11 +37,23 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
 .panel-left {
   overflow-y: auto;
   max-height: 100%;
+
+  // Mobile: remove individual panel scrolling
+  @media (max-width: $breakpoint-lg) {
+    overflow-y: visible;
+    max-height: none;
+  }
 }
 
 .panel-right {
   overflow-y: auto;
   max-height: 100%;
+
+  // Mobile: remove individual panel scrolling
+  @media (max-width: $breakpoint-lg) {
+    overflow-y: visible;
+    max-height: none;
+  }
 }
 
 .panel-title {
@@ -140,14 +152,14 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     gap: $spacing-4;
     max-width: none;
     padding: $spacing-3;
-    height: 100vh;
-    overflow: hidden;
+    height: auto; // Changed from 100vh to auto for natural height
+    overflow: visible; // Changed from hidden to visible for full page scroll
   }
   .panel-left,
   .panel-right {
     width: 100%;
-    overflow-y: auto;
-    max-height: 100%;
+    overflow-y: visible; // Changed from auto to visible
+    max-height: none; // Changed from 100% to none
   }
 }
 
