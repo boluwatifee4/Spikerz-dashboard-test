@@ -90,7 +90,7 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     border: 0;
     height: 1px;
     background: $border-light;
-    margin: 0;
+    margin: $spacing-6 0;
   }
 
   .meta-grid {
@@ -98,6 +98,9 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     flex-direction: column;
     gap: $spacing-4;
     margin: 0;
+    border-bottom: 1px solid $border-light;
+    padding-bottom: $spacing-5;
+    margin-bottom: $spacing-5;
   }
 
   .meta-row {
