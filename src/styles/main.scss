@@ -504,3 +504,96 @@ body {
 //     display: block;
 //   }
 // }
+
+// ============================================================================
+// CUSTOM SCROLLBAR STYLES
+// ============================================================================
+// Beautiful, thin scrollbar matching the Spikerz theme
+
+// Webkit browsers (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba($color-primary-green, 0.3);
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba($color-primary-green, 0.6);
+  transform: scaleX(1.2);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: $color-primary-green;
+}
+
+::-webkit-scrollbar-corner {
+  background: $bg-secondary;
+}
+
+// Firefox
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba($color-primary-green, 0.3) $bg-secondary;
+}
+
+// Custom scrollbar for specific components
+.scrollbar-thin {
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-primary-blue, 0.4);
+    border-radius: 2px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba($color-primary-blue, 0.7);
+  }
+
+  scrollbar-color: rgba($color-primary-blue, 0.4) $bg-secondary;
+}
+
+// Dark scrollbar variant for darker backgrounds
+.scrollbar-dark {
+  &::-webkit-scrollbar-track {
+    background: rgba($color-gray-800, 0.1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba($color-gray-600, 0.4);
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba($color-gray-500, 0.7);
+  }
+
+  scrollbar-color: rgba($color-gray-600, 0.4) rgba($color-gray-800, 0.1);
+}
+
+// Smooth scrolling behavior
+html {
+  scroll-behavior: smooth;
+}
+
+// Hide scrollbar for specific elements if needed
+.scrollbar-hidden {
+  -ms-overflow-style: none; // IE and Edge
+  scrollbar-width: none; // Firefox
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome, Safari, and Opera
+  }
+}
