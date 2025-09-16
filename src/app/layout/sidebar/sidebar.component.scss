@@ -29,16 +29,10 @@
 
   &.collapsed {
     .sidebar-brand {
-      // margin-top: $spacing-12;
-      margin-bottom: $spacing-6;
-      padding: 0;
+      margin-bottom: $spacing-4; // Reduced margin for tighter layout when collapsed
+      padding: $spacing-2 0; // Reduced padding for compact appearance
     }
-    .brand-logo-full {
-      display: none;
-    }
-    .brand-logo-compact {
-      display: block;
-    }
+    // Only compact logo is used, no need for full/compact toggle
   }
 
   &.collapsed {
@@ -106,12 +100,8 @@
   margin-bottom: $spacing-6;
   text-decoration: none;
 
-  // Hide logo on desktop (1024px and above), show only on mobile
-  &.mobile-only {
-    @media (min-width: 1024px) {
-      display: none;
-    }
-  }
+  // Show logo on all screen sizes
+  // Removed mobile-only restriction to allow logo on desktop
 }
 
 .brand-logo {
@@ -119,13 +109,10 @@
   width: auto;
 }
 
-.brand-logo-full {
-  display: block;
-}
-
 .brand-logo-compact {
-  display: none;
+  display: block;
   height: 32px;
+  width: auto;
 }
 
 // Navigation

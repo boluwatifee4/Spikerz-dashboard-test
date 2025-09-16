@@ -90,7 +90,7 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     border: 0;
     height: 1px;
     background: $border-light;
-    margin: $spacing-6 0;
+    margin: 0;
   }
 
   .meta-grid {
@@ -445,7 +445,7 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     height: 1px;
     border: 0;
     background: $border-light;
-    margin: 0 0 $spacing-4;
+    margin: 0;
   }
 
   .status-legend {
