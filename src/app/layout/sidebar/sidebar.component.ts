@@ -44,8 +44,8 @@ interface NavigationItem {
         </svg>
       </button>
 
-      <!-- Brand / Logo -->
-      <a class="sidebar-brand" [routerLink]="'/dashboard'" aria-label="Home">
+      <!-- Brand / Logo (mobile only) -->
+      <a class="sidebar-brand mobile-only" [routerLink]="'/dashboard'" aria-label="Home">
         <img
           *ngIf="!isCollapsed"
           src="/logo.png"

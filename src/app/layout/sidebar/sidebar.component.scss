@@ -99,6 +99,35 @@
   }
 }
 
+// Brand/Logo Section
+.sidebar-brand {
+  @include flex-center;
+  padding: $spacing-4 0;
+  margin-bottom: $spacing-6;
+  text-decoration: none;
+
+  // Hide logo on desktop (1024px and above), show only on mobile
+  &.mobile-only {
+    @media (min-width: 1024px) {
+      display: none;
+    }
+  }
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+.brand-logo-full {
+  display: block;
+}
+
+.brand-logo-compact {
+  display: none;
+  height: 32px;
+}
+
 // Navigation
 .sidebar-nav {
   @include flex-column;
@@ -150,11 +179,6 @@
 
   &.active {
     background-color: $color-active;
-
-    .nav-icon {
-      filter: brightness(0) saturate(100%) invert(55%) sepia(73%)
-        saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
-    }
   }
 
   &:focus {
@@ -192,6 +216,7 @@
   font-size: $font-size-sm;
   white-space: nowrap;
   opacity: 1;
+  font-weight: 400;
   transition: opacity $transition-duration-fast $transition-timing-ease;
 
   .sidebar.collapsed & {

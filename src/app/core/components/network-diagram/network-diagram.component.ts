@@ -61,7 +61,7 @@ export class NetworkDiagramComponent implements OnInit, OnDestroy {
   forkCompression = 0.75; // reduced further (0-1 shrink horizontally; lower = narrower)
 
   getNodePosition(id: string) { const n = this.nodes.find(x => x.id === id); return n ? n.position : { x: 0, y: 0 }; }
-  getNodeIcon(n: NetworkNode) { if (n.type === 'user') return 'assets/icons/status/amaya-users.svg'; if (n.type === 'server') return 'assets/icons/status/stack-bars.svg'; return n.status === 'error' ? 'assets/icons/status/unprotected.svg' : 'assets/icons/status/protected.svg'; }
+  getNodeIcon(n: NetworkNode) { if (n.type === 'user') return 'assets/icons/status/amaya-users.svg'; if (n.type === 'server') return 'assets/icons/status/stack-bars.svg'; return n.status === 'error' ? 'assets/icons/status/unprotected-bar.svg' : 'assets/icons/status/protected-bar.svg'; }
   getNodeImageSize() { return 72; } // Updated size per latest request
   getDefaultRadius() { return 55; }
   private getPopoverWidth(id: string) { switch (id) { case 'user': return 320; case 'server1': return 400; case 'server2': return 360; case 'endpoint1': case 'endpoint2': return 320; default: return 360; } }

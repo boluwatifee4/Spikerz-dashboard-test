@@ -352,14 +352,11 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
   font-size: var(--dash-subheading-scale);
 }
 
-// Table horizontal overflow protection
-.panel-right .assets-card {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.panel-right .assets-table {
-  min-width: 32rem;
-}
+// Table styling without horizontal overflow
+// Removed min-width constraint to prevent horizontal scroll on small screens
+// .panel-right .assets-table {
+//   min-width: 32rem;
+// }
 
 // Utility responsive classes (scoped locally)
 .dashboard-hide-mobile {
@@ -440,7 +437,7 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     @include flex-center;
     font-size: $font-size-sm;
     color: $text-muted;
-    margin: 0 0 $spacing-6;
+    margin: 0;
   }
 
   .flow-legend-divider {
@@ -577,7 +574,7 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     line-height: 1.1;
   }
   .asset-name {
-    font-weight: $font-weight-medium;
+    font-weight: $font-weight-regular;
     color: $text-primary;
   }
   .asset-ip {
@@ -589,14 +586,14 @@ $dashboard-panel-padding-y: $spacing-7; // Changed from 1.875rem to token
     display: inline-flex;
     align-items: center;
     padding: 0 $spacing-4;
-    height: 1.5rem;
+    height: 30px;
     border-radius: $border-radius-full;
-    font-size: $font-size-xs;
-    font-weight: $font-weight-medium;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
     letter-spacing: 0.25px;
     &.critical {
-      background: rgba($color-primary-red, 0.15);
-      color: $color-primary-red;
+      background: #ffe2e0;
+      color: #c6190d;
     }
   }
 

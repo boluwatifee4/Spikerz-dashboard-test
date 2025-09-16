@@ -32,8 +32,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
             </ng-template>
           </button>
 
-          <!-- Logo -->
-          <a class="header-logo" routerLink="/dashboard">
+          <!-- Logo (mobile only) -->
+          <a class="header-logo mobile-only" routerLink="/dashboard">
             <img src="/logo.png" alt="Logo" class="logo-image" />
           </a>
 

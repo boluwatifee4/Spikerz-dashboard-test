@@ -85,6 +85,13 @@
       height: 32px;
       width: auto;
     }
+
+    // Hide logo on desktop (1024px and above), show only on mobile
+    &.mobile-only {
+      @media (min-width: 1024px) {
+        display: none;
+      }
+    }
   }
 
   .header-spacer {
